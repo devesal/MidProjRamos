@@ -1,6 +1,6 @@
 package models;
 
-public class BankAccount {
+public class BankAccounts {
     private int accountNo;
     private String accountName;
     private double balance;
@@ -10,7 +10,7 @@ public class BankAccount {
         accountNo = 100000000;
         accountName = "";
         balance = 0.0;
-        status = "Closed";
+        status = "Active";
 
     }
     public BankAccounts(int accountNo, String name, double balance, String status){
@@ -35,7 +35,7 @@ public class BankAccount {
         this.accountName = accountName;
     }
     public String toString(){
-        return "Account Created"; //unsure yet
+        return "Account Created:\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
     }
 
     public void deposit(double amount){
@@ -45,24 +45,52 @@ public class BankAccount {
     }
 
     public void withdraw(double amount){
-        this.balance = balance - amount;
-        System.out.print("Money has been withdrawn from your account");
-        System.out.println("Please check your account for safety measures");
+        if(balance >= amount) {
+            this.balance = balance - amount;
+            System.out.print("Money has been withdrawn from your account");
+            System.out.println("Please check your account for safety measures");
+        }
+        if(balance < amount){
+            System.out.print("Insufficient balance. Transaction terminated");
+        }
     }
 
     public double inquireBalance(){
+        System.out.print("Your balance is: "+balance);
         return balance;
     }
 
-    public void transferMoney(){
-        //to be figured out and continued on IntelliJ. Work In Progress
+    public void transferMoney(int accountNo, double amount, BankAccounts[]listOfBankAccounts){
+        boolean accountFound = false;
+        for (BankAccounts account : listOfBankAccounts) {
+            if (account.getAccountNo() == accountNo && account.getStatus().equals("Active")) {
+                accountFound = true;
+                break;
+            }
+        }
+        if (accountFound) {
+            if (amount <= balance) {
+                balance -= amount;
+                for (BankAccounts account : listOfBankAccounts) {
+                    if (account.getAccountNo() == accountNo) {
+                        account.deposit(amount);
+                        System.out.println("Transfer successful.");
+                    }
+                }
+            } else {
+                System.out.println("Insufficient balance. Transfer transaction terminated.");
+            }
+        } else {
+            System.out.println("Account not found. Transfer transaction terminated.");
+        }
+
     }
 
     public void closeAccount(){
         if(balance >0){
             System.out.print("Please withdraw your remaining balance before closing your account");
         }
-        if(balance < 0){
+        else{
             this.status = "Closed";
             System.out.print("This account has been closed");
         }
