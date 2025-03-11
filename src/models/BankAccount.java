@@ -1,19 +1,19 @@
 package models;
 
-public class BankAccounts {
+public class BankAccount {
     private int accountNo;
     private String accountName;
     private double balance;
     private String status;
 
-    public BankAccounts(){
+    public BankAccount(){
         accountNo = 100000000;
         accountName = "";
         balance = 0.0;
         status = "Active";
 
     }
-    public BankAccounts(int accountNo, String name, double balance, String status){
+    public BankAccount(int accountNo, String name, double balance, String status){
         this.accountNo = accountNo;
         this.accountName = name;
         this.balance = balance;
@@ -60,9 +60,9 @@ public class BankAccounts {
         return balance;
     }
 
-    public void transferMoney(int accountNo, double amount, BankAccounts[]listOfBankAccounts){
+    public void transferMoney(int accountNo, double amount, BankAccount[]listOfBankAccounts){
         boolean accountFound = false;
-        for (BankAccounts account : listOfBankAccounts) {
+        for (BankAccount account : listOfBankAccounts) {
             if (account.getAccountNo() == accountNo && account.getStatus().equals("Active")) {
                 accountFound = true;
                 break;
@@ -71,7 +71,7 @@ public class BankAccounts {
         if (accountFound) {
             if (amount <= balance) {
                 balance -= amount;
-                for (BankAccounts account : listOfBankAccounts) {
+                for (BankAccount account : listOfBankAccounts) {
                     if (account.getAccountNo() == accountNo) {
                         account.deposit(amount);
                         System.out.println("Transfer successful.");
