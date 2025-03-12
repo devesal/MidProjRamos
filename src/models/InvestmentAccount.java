@@ -11,7 +11,7 @@ public class InvestmentAccount extends BankAccount {
     }
 
     public InvestmentAccount(int accountNo, String accountName, double minimumBalance, double interest){
-        super(accountNo, accountName, 0.0, "Active");
+        super(accountNo, accountName, 0.0, "Active"); // Not sure why, but this line has an error in my IDE
         this.minimumBalance = minimumBalance;
         this.interest = interest;
     }
@@ -37,12 +37,14 @@ public class InvestmentAccount extends BankAccount {
         double finalBalance = super.inquireBalance() * (1 + interest);
         if (finalBalance > 0) {
             withdraw(finalBalance);
+            super.closeAccount();
+
         } else {
             System.out.println("There is no balance to withdraw.");
+
         }
 
-        System.out.println("This account has been closed. Remaining balance has been withdrawn.");
-        super.closeAccount();
+
     }
 
 }
