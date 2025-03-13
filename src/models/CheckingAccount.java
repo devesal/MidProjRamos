@@ -8,7 +8,7 @@ public class CheckingAccount extends BankAccount {
     }
 
     public CheckingAccount (int accountNo, String accountName, double minimumBalance) {
-        super();
+        //super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
     }
 
