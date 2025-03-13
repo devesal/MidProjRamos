@@ -28,6 +28,9 @@ public class BankAccount {
     public void setAccountName(String accountName){
         this.accountName = accountName;
     }
+    public void setStatus(String status){
+        this.status = "Active";
+    }
     public String toString(){
         return "Account Created:\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
     }
