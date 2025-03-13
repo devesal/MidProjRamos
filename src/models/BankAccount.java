@@ -36,7 +36,7 @@ public class BankAccount {
     public void setAccountName(String accountName){
         this.accountName = accountName;
     }
-    public void setStatus(String status) {
+    public void setStatus(String status){
         this.status = "Active";
     }
     public String toString(){
