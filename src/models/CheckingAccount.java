@@ -10,6 +10,7 @@ public class CheckingAccount extends BankAccount {
     public CheckingAccount (int accountNo, String accountName, double minimumBalance) {
         super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
+        String status = getStatus();
     }
 
     public void setMinimumBalance(double minimumBalance) {

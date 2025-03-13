@@ -15,6 +15,7 @@ public class CreditCardAccount extends BankAccount {
         super(accountNo, accountName);
         this.creditLimit = creditLimit;
         this.charges = charges;
+        String status = getStatus();
     }
     public double getCreditLimit(){
         return this.creditLimit;

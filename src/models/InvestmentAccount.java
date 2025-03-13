@@ -15,6 +15,7 @@ public class InvestmentAccount extends BankAccount {
         super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
         this.interest = interest;
+        String status = getStatus();
     }
 
     public double getMinimumBalance() {
