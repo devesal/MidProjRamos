@@ -14,11 +14,11 @@ public class BankAccount {
 
     }
 
-    public BankAccount(int accountNo, String accountName, String status){
+    public BankAccount(int accountNo, String accountName){
         this.accountNo = accountNo;
         this.accountName = accountName;
         this.balance = balance;
-        this.status = status;
+        this.status = "Active";
     }
 
     public int getAccountNo(){
