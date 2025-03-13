@@ -1,6 +1,6 @@
 package models;
 
-public class CheckingAccount extends BankAccounts {
+public class CheckingAccount extends BankAccount {
     public double minimumBalance;
 
     public CheckingAccount () {
@@ -8,7 +8,7 @@ public class CheckingAccount extends BankAccounts {
     }
 
     public CheckingAccount (int accountNo, String accountName, double minimumBalance) {
-        super(accountNo, accountName, 0.0, "active");
+        super();
         this.minimumBalance = minimumBalance;
     }
 
