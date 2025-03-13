@@ -5,14 +5,14 @@ public class InvestmentAccount extends BankAccount {
     private double minimumBalance;
     private double interest;
 
-    public InvestmentAccount(int accountNo, String accountName, String status){
+    public InvestmentAccount(int accountNo, String accountName, String status) {
         super(accountNo, accountName, status);
         minimumBalance = 0.0;
         interest = 0.0;
         status = "Active";
     }
 
-    public InvestmentAccount(double minimumBalance, double interest){
+    public InvestmentAccount(double minimumBalance, double interest) {
         this.minimumBalance = minimumBalance;
         this.interest = interest;
     }
@@ -25,20 +25,20 @@ public class InvestmentAccount extends BankAccount {
         return interest;
     }
 
-    public void addInvestment(double amount){
+    public void addInvestment(double amount) {
         super.deposit(amount);
     }
 
-    public void inquireInvestmentValue(){
+    public void inquireInvestmentValue() {
         double investmentValue = super.inquireBalance() * (1 + interest);
         System.out.println("Your investment value is: " + investmentValue);
     }
 
-    public void transferMoney(int accountNo, double amount, BankAccount[]listOfBankAccounts){
+    public void transferMoney(int accountNo, double amount, BankAccount[]listOfBankAccounts) {
         System.out.println("You cannot transfer money from an investment account.");
     }
 
-    public void withdraw(double amount){
+    public void withdraw(double amount) {
         System.out.println("You cannot withdraw money from an investment account.");
         System.out.println("Please close your account to withdraw your investment.");
     }
@@ -54,10 +54,6 @@ public class InvestmentAccount extends BankAccount {
             System.out.println("There is no balance to withdraw.");
             super.setStatus("Closed");
             System.out.println("Your account has been closed.");
-
         }
-
-
     }
-
 }
