@@ -1,8 +1,5 @@
 package models;
 
-//let me know if there are any issues
-//or new additions you would like to see/ are needed :>
-
 public class CheckingAccount extends BankAccounts {
     public double minimumBalance;
 
