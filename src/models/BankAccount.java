@@ -23,21 +23,27 @@ public class BankAccount {
     public int getAccountNo() {
         return accountNo;
     }
+
     public String getAccountName() {
         return accountName;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setAccountNo(int accountNo) {
         this.accountNo = accountNo;
     }
+
     public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
+
     public void setStatus(String status) {
         this.status = "Active";
     }
+
     public String toString() {
         return "Account Created:\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
     }
