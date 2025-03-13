@@ -8,7 +8,7 @@ public class CheckingAccount extends BankAccount {
     }
 
     public CheckingAccount (int accountNo, String accountName, double minimumBalance) {
-        //super(accountNo, accountName);
+        super(accountNo, accountName, "active");
         this.minimumBalance = minimumBalance;
     }
 
@@ -19,6 +19,7 @@ public class CheckingAccount extends BankAccount {
     public double getMinimumBalance() {
         return minimumBalance;
     }
+
 
     public void encashCheck (double amount) {
         if (amount >= minimumBalance) {
