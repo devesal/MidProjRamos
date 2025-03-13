@@ -13,6 +13,14 @@ public class BankAccount {
         status = "Active";
 
     }
+
+    public BankAccount(int accountNo, String accountName, String status){
+        this.accountNo = accountNo;
+        this.accountName = accountName;
+        this.balance = balance;
+        this.status = status;
+    }
+
     public int getAccountNo(){
         return accountNo;
     }
@@ -27,6 +35,9 @@ public class BankAccount {
     }
     public void setAccountName(String accountName){
         this.accountName = accountName;
+    }
+    public void setStatus(String status) {
+        this.status = "Active";
     }
     public String toString(){
         return "Account Created:\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
