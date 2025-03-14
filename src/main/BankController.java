@@ -1,5 +1,6 @@
 package main;
 
+import models.BankAccount;
 import models.CheckingAccount;
 import models.CreditCardAccount;
 import models.InvestmentAccount;
@@ -38,21 +39,32 @@ public class BankController {
             showAccountCreationMenu();
 
             switch (selectMenuOption(4)) {
-                case 1 -> createCheckingAccount();
-                case 2 -> createCreditCardAccount();
-                case 3 -> createInvestmentAccount();
+                case 1 -> createAccount("Checking");
+                case 2 -> createAccount("CreditCard");
+                case 3 -> createAccount("Investment");
                 case 4 -> backToMainMenu = true;
             }
         } while (!backToMainMenu);
     }
 
-    private static void createInvestmentAccount() {
+    private static void createAccount(String type) {
+        System.out.println("\nCHECKING ACCOUNT CREATION");
+
+        String firstName = getStringInput("First Name: ");
+        String lastName = getStringInput("Last Name: ");
+        String name = firstName + " " + lastName;
+
+        BankAccount account = null;
+        switch (type) {
+            case "Checking" -> account = new CheckingAccount(name);
+            case "CreditCard" -> account = new CreditCardAccount(name);
+            case "Investment" -> account = new InvestmentAccount(name);
+        }
+        addAccount(account, type);
     }
 
-    private static void createCreditCardAccount() {
-    }
-
-    private static void createCheckingAccount() {
+    private static void addAccount(BankAccount account, String type) {
+        // TODO
     }
 
     private static void showAccountCreationMenu() {
@@ -112,5 +124,12 @@ public class BankController {
         System.out.print(s);
 
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static String getStringInput(String s) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(s);
+
+        return scanner.nextLine();
     }
 }
