@@ -7,7 +7,7 @@ public class CreditCardAccount extends BankAccounts {
 
     public CreditCardAccount(){
 
-        creditLimit = 0.0;
+        creditLimit = 100000;
         charges = 0.0;
 
     }
