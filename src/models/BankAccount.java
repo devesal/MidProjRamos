@@ -21,10 +21,9 @@ public class BankAccount {
         this.status = "Active";
     }
   
-    public BankAccount(int accountNo, String accountName, String status){
+    public BankAccount(int accountNo, String accountName, String status) {
         this.accountNo = accountNo;
         this.accountName = accountName;
-        this.balance = balance;
         this.status = status;
     }
   
