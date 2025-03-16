@@ -1,6 +1,7 @@
 package models;
 
 public class BankAccount {
+    private static int nextAccountNumber = 100000000;
     private int accountNo;
     private String accountName;
     private double balance;
@@ -13,10 +14,10 @@ public class BankAccount {
         status = "Active";
     }
 
-    public BankAccount(int accountNo, String accountName) {
-        this.accountNo = accountNo;
+    public BankAccount(String accountName) {
+        this.accountNo = nextAccountNumber++;
         this.accountName = accountName;
-        this.balance = balance;
+        this.balance = 0.0;
         this.status = "Active";
     }
   
