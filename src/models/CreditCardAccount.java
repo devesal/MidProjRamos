@@ -5,49 +5,49 @@ public class CreditCardAccount extends BankAccount {
     private double charges;
 
 
-    public CreditCardAccount(){
+    public CreditCardAccount() {
 
         creditLimit = 0.0;
         charges = 0.0;
 
     }
-    public CreditCardAccount(int accountNo, String accountName, double creditLimit, double charges){
-        super(accountNo, accountName);
+    public CreditCardAccount(int accountNo, String accountName, double creditLimit, double charges) {
+        super(accountNo, accountName, 0.0, "active");
         this.creditLimit = creditLimit;
         this.charges = charges;
-        String status = getStatus();
+
     }
-    public double getCreditLimit(){
+    public double getCreditLimit() {
         return this.creditLimit;
     }
-    public double getCharges(){
+    public double getCharges() {
         return this.charges;
     }
-    public void payCard(double amount){
-        if (amount <= charges){
+    public void payCard(double amount) {
+        if (amount <= charges) {
             charges -= amount;
             System.out.println("Successful, remaining charges: "+ charges);
         }
         else
             System.out.println("Payment is more than the charges");
     }
-    public void inquireAvailableCredit(){
+    public void inquireAvailableCredit() {
         double availableCredit = creditLimit - charges;
         System.out.println("Your available Credit is: "+availableCredit);
     }
-    public void chargeToCard(double amount){
+    public void chargeToCard(double amount) {
         double availableCredit = creditLimit - charges;
-        if(availableCredit >= amount){
+        if(availableCredit >= amount) {
             charges += amount;
             System.out.println("Charges successful, total charges: "+charges);
         }
         else
             System.out.println("Not enough credit");
     }
-    public void getCashAdvance(double amount){
+    public void getCashAdvance(double amount) {
         double availableCredit = creditLimit - charges;
         availableCredit = availableCredit * 0.5;
-        if(amount < availableCredit){
+        if(amount < availableCredit) {
             charges += amount;
             System.out.println("Cash advance successful, total charge: "+charges);
         }

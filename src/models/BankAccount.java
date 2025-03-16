@@ -19,7 +19,14 @@ public class BankAccount {
         this.balance = balance;
         this.status = "Active";
     }
-
+  
+    public BankAccount(int accountNo, String accountName, String status){
+        this.accountNo = accountNo;
+        this.accountName = accountName;
+        this.balance = balance;
+        this.status = status;
+    }
+  
     public int getAccountNo() {
         return accountNo;
     }
