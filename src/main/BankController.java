@@ -1,5 +1,6 @@
 package main;
 
+import models.BankAccount;
 import models.CheckingAccount;
 import models.CreditCardAccount;
 import models.InvestmentAccount;
@@ -34,6 +35,27 @@ public class BankController {
         } while (running);
     }
 
+    private void createAccount(String type) {
+        System.out.println("Name: ");
+        String name = scanner.nextLine();
+
+        switch (type) {
+            case "Checking" -> {
+                CheckingAccount account = new CheckingAccount(name);
+                checkingAccounts.add(account);
+            }
+            case "Credit" -> {
+                CreditCardAccount account = new CreditCardAccount(name);
+                creditCardAccounts.add(account);
+            }
+            case "Investment" -> {
+                InvestmentAccount account = new InvestmentAccount(name);
+                investmentAccounts.add(account);
+            }
+        }
+    }
+
+
     private void accountCreationMenu() {
         boolean backToMainMenu = false;
         do {
@@ -49,7 +71,6 @@ public class BankController {
     }
 
     private void createInvestmentAccount() {
-        System.out.println("Name: ");
         InvestmentAccount newAccount = new InvestmentAccount();
         newAccount.setAccountName(scanner.nextLine());
 
