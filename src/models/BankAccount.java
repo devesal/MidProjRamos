@@ -7,6 +7,7 @@ public class BankAccount {
     private String accountName;
     private double balance;
     private String status;
+    private String pin;
 
     public BankAccount() {
         this.accountNo = nextAccountNumber++;
@@ -21,6 +22,15 @@ public class BankAccount {
         this.balance = 0.0;
         this.status = "Active";
     }
+
+    public BankAccount(String accountName, String pin) {
+        this.accountNo = nextAccountNumber++;
+        this.accountName = accountName;
+        this.balance = 0.0;
+        this.status = "Active";
+        this.pin = pin;
+    }
+
 
     public BankAccount(int accountNo, String accountName) {
         this.accountNo = accountNo;
@@ -59,8 +69,12 @@ public class BankAccount {
         return accountName;
     }
 
+    public String getPin() {
+        return pin;
+    }
+
     public String toString() {
-        return "Account Created:\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
+        return "\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
     }
 
     public void deposit(double amount) {
@@ -107,7 +121,7 @@ public class BankAccount {
             }
         }
 
-        System.out.println("No such bank account found");
+        System.out.println("Account not found");
     }
 
     public void closeAccount() {

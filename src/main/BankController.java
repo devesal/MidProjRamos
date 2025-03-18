@@ -5,21 +5,24 @@ import models.CheckingAccount;
 import models.CreditCardAccount;
 import models.InvestmentAccount;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BankController {
 
     private final Scanner scanner = new Scanner(System.in);
-    public ArrayList<CheckingAccount> checkingAccounts;
-    public ArrayList<InvestmentAccount> investmentAccounts;
-    public ArrayList<CreditCardAccount> creditCardAccounts;
+    public ArrayList<CheckingAccount> checkingAccounts = new ArrayList<>();
+    public ArrayList<InvestmentAccount> investmentAccounts = new ArrayList<>();
+    public ArrayList<CreditCardAccount> creditCardAccounts = new ArrayList<>();
 
     public void start() {
         boolean running = true;
 
         do {
-            System.out.println("\nWELCOME TO CO-PALS BANK");
+            System.out.println("\n=======================");
+            System.out.println("WELCOME TO CO-PALS BANK");
+            System.out.println("=======================");
 
             showArrayMenu();
 
@@ -37,64 +40,89 @@ public class BankController {
     }
 
     private void createAccount(String type) {
-        System.out.println("Name: ");
-        String name = scanner.nextLine();
+        System.out.println("\n=======================");
+        System.out.println("\nCREATING ACCOUNT");
 
+        System.out.print("\nLast Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("First Name: ");
+        String firstName = scanner.nextLine();
+
+        String fullName = String.format("%s %s", lastName, firstName);
+        String pin = setupPin();
+
+        int accountNo = 0;
         switch (type) {
             case "Checking" -> {
-                CheckingAccount account = new CheckingAccount(name);
+                CheckingAccount account = new CheckingAccount(fullName, pin);
                 checkingAccounts.add(account);
+                System.out.println(account.getPin());
+                accountNo = account.getAccountNo();
             }
             case "Credit" -> {
-                CreditCardAccount account = new CreditCardAccount(name);
+                CreditCardAccount account = new CreditCardAccount(fullName, pin);
                 creditCardAccounts.add(account);
+                accountNo = account.getAccountNo();
             }
             case "Investment" -> {
-                InvestmentAccount account = new InvestmentAccount(name);
+                InvestmentAccount account = new InvestmentAccount(fullName, pin);
                 investmentAccounts.add(account);
+                accountNo = account.getAccountNo();
             }
+        }
+
+        System.out.println("\nAccount Created!");
+        System.out.println(fullName);
+        System.out.println(accountNo);
+    }
+
+    private String setupPin() {
+        String pin1;
+        String pin2;
+
+        while (true) {
+            pin1 = inputPin("PIN: ");
+
+            pin2 = inputPin("Confirm your PIN: ");
+
+            if (!pin1.equals(pin2)) {
+                System.out.println("PIN does not match.");
+                continue;
+            }
+
+            return pin1;
         }
     }
 
+    private String inputPin(String s) {
+        String pin;
+        do {
+            System.out.print(s);
+            pin = scanner.nextLine();
+
+            if (pin.length() != 6) {
+                System.out.println("PIN must be 6 digits.");
+            }
+        } while (pin.length() != 6);
+
+        return pin;
+    }
 
     private void accountCreationMenu() {
+        showAccountCreationMenu();
+
         boolean backToMainMenu = false;
-        do {
-            showAccountCreationMenu();
-
-            switch (selectMenuOption(4)) {
-                case 1 -> createCheckingAccount();
-                case 2 -> createCreditCardAccount();
-                case 3 -> createInvestmentAccount();
-                case 4 -> backToMainMenu = true;
-            }
-        } while (!backToMainMenu);
-    }
-
-    private void createInvestmentAccount() {
-        InvestmentAccount newAccount = new InvestmentAccount();
-        newAccount.setAccountName(scanner.nextLine());
-
-        investmentAccounts.add(newAccount);
-    }
-
-    private void createCreditCardAccount() {
-        System.out.println("Name: ");
-        CreditCardAccount newAccount = new CreditCardAccount();
-        newAccount.setAccountName(scanner.nextLine());
-
-        creditCardAccounts.add(newAccount);
-    }
-
-    private void createCheckingAccount() {
-        System.out.print("Name: ");
-        CheckingAccount newAccount = new CheckingAccount();
-        newAccount.setAccountName(scanner.nextLine());
-
-        checkingAccounts.add(newAccount);
+        switch (selectMenuOption(4)) {
+            case 1 -> createAccount("Checking");
+            case 2 -> createAccount("Credit");
+            case 3 -> createAccount("Investment");
+            case 4 -> backToMainMenu = true;
+        }
     }
 
     private void showAccountCreationMenu() {
+        System.out.println("\n=====================");
         System.out.println("\nSELECT ACCOUNT TYPE");
 
         System.out.println("\n[1] Checking Account");
@@ -104,6 +132,26 @@ public class BankController {
     }
 
     private void balanceInquiry() {
+        System.out.println("\n======================");
+        System.out.println("\nBALANCE INQUIRY");
+
+        System.out.print("\nAccount Number: ");
+        int accountNumber = Integer.parseInt(scanner.nextLine());
+
+        String pin = inputPin("PIN: ");
+
+        for (CheckingAccount account : checkingAccounts) {
+            if (account.getAccountNo() == accountNumber) {
+                if (account.getPin().equals(pin)) {
+                    System.out.println(account);
+                } else {
+                    System.out.println("Incorrect PIN.");
+                }
+                return;
+            }
+        }
+
+        System.out.println("Account not found.");
     }
 
     private void deposit() {
@@ -136,17 +184,23 @@ public class BankController {
 
     private int selectMenuOption(int max) {
         int input;
-        do {
-            input = getIntInput("\nSELECT OPTION: ");
-            if (input < 1 || input > max) {
-                System.out.println("Invalid option");
-            }
-        } while (input < 1 || input > max);
+        while (true) {
+            try {
+                System.out.println("\n=======================");
+                input = getIntInput("\nSELECT OPTION: ");
+                if (input >= 1 && input <= max) {
+                    return input;
+                }
 
-        return input;
+                System.out.println("Invalid option. Please enter a number between 1 and " + max + ".");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
     }
 
-    private int getIntInput(String s) {
+    private int getIntInput(String s) throws NumberFormatException {
         Scanner scanner = new Scanner(System.in);
         System.out.print(s);
 

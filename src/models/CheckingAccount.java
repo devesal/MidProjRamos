@@ -19,6 +19,10 @@ public class CheckingAccount extends BankAccount {
         this.minimumBalance = minimumBalance;
     }
 
+    public CheckingAccount(String accountName, String pin) {
+        super(accountName, pin);
+    }
+
     public CheckingAccount (int accountNo, String accountName, double minimumBalance) {
         super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
