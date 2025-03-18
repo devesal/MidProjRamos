@@ -1,18 +1,26 @@
 package models;
 
 public class CheckingAccount extends BankAccount {
+
     public double minimumBalance;
 
-    public CheckingAccount () {
-        this.minimumBalance = 0;
+    public CheckingAccount() {
+        super();
+        this.minimumBalance = 0.0; // TODO: Think of a default minimum balance
     }
 
-    public CheckingAccount (int accountNo, String accountName, double minimumBalance) {
-        super(accountNo, accountName, "active");
+    public CheckingAccount(String name) {
+        super(name);
+        this.minimumBalance = 0.0;
+    }
+
+    public CheckingAccount(String accountName, double minimumBalance) {
+        super(accountName);
         this.minimumBalance = minimumBalance;
     }
 
-    public void setMinimumBalance(double minimumBalance) {
+    public CheckingAccount (int accountNo, String accountName, double minimumBalance) {
+        super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
     }
 
@@ -28,9 +36,9 @@ public class CheckingAccount extends BankAccount {
 
     public void encashCheck (double amount) {
         if (amount >= minimumBalance) {
-            System.out.println("Encashing of " + amount + " pesos is successful");
+            System.out.println("Encashing of ₱" + amount + " is successful");
             super.withdraw(amount);
-        } else  {
+        } else {
             System.out.println("Your withdrawal exceeds the minimum balance");
         }
 

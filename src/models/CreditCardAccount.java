@@ -1,57 +1,65 @@
 package models;
 
 public class CreditCardAccount extends BankAccount {
+
     private double creditLimit;
     private double charges;
 
-
     public CreditCardAccount() {
+        super();
         creditLimit = 100000;
         charges = 0.0;
-
     }
+
+    public CreditCardAccount(String accountName) {
+        super(accountName);
+    }
+
     public CreditCardAccount(int accountNo, String accountName, double creditLimit, double charges) {
-        setAccountNo(accountNo);
-        setAccountName(accountName);
+        super(accountNo, accountName);
         this.creditLimit = creditLimit;
         this.charges = charges;
-
+        setAccountNo(accountNo);
+        setAccountName(accountName);
     }
+
     public double getCreditLimit() {
         return this.creditLimit;
     }
+
     public double getCharges() {
         return this.charges;
     }
+
+    // TODO: Handle input validation in main method
     public void payCard(double amount) {
-        if (amount <= charges) {
-            charges -= amount;
-            System.out.println("Successful, remaining charges: "+ charges);
-        }
-        else
-            System.out.println("Payment is more than the charges");
+        charges -= amount;
+        System.out.println("Payment successful! Your remaining balance is: ₱" + charges);
     }
+
     public void inquireAvailableCredit() {
         double availableCredit = creditLimit - charges;
-        System.out.println("Your available Credit is: "+availableCredit);
+        System.out.println("Your available credit is: "+ availableCredit);
     }
+
     public void chargeToCard(double amount) {
         double availableCredit = creditLimit - charges;
-        if(availableCredit >= amount) {
+        if (availableCredit >= amount) {
             charges += amount;
-            System.out.println("Charges successful, total charges: "+charges);
-        }
-        else
+            System.out.println("Charges successful, total charges: "+ charges);
+        } else {
             System.out.println("Not enough credit");
+        }
     }
+
     public void getCashAdvance(double amount) {
         double availableCredit = creditLimit - charges;
         availableCredit = availableCredit * 0.5;
-        if(amount < availableCredit) {
+        if (amount < availableCredit) {
             charges += amount;
-            System.out.println("Cash advance successful, total charge: "+charges);
+            System.out.println("Cash advance approved! Your new total balance is: $" + charges);
+        } else {
+            System.out.println("Transaction declined: Requested cash advance exceeds your available credit.");
         }
-        else
-            System.out.println("Cash advance exceeds the required Cash advance limit");
     }
 }

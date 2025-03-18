@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BankController {
+
     private final Scanner scanner = new Scanner(System.in);
     public ArrayList<CheckingAccount> checkingAccounts;
     public ArrayList<InvestmentAccount> investmentAccounts;
@@ -96,10 +97,10 @@ public class BankController {
     private void showAccountCreationMenu() {
         System.out.println("\nSELECT ACCOUNT TYPE");
 
-        System.out.println("\n1. Checking Account");
-        System.out.println("2. Credit Card Account");
-        System.out.println("3. Investment Account");
-        System.out.println("4. Back to Main Menu");
+        System.out.println("\n[1] Checking Account");
+        System.out.println("[2] Credit Card Account");
+        System.out.println("[3] Investment Account");
+        System.out.println("[4] Back to Main Menu");
     }
 
     private void balanceInquiry() {
@@ -123,14 +124,14 @@ public class BankController {
     }
 
     private void showArrayMenu() {
-        System.out.println("\n1. Create Account");
-        System.out.println("2. Balance Inquiry");
-        System.out.println("3. Deposit Transaction");
-        System.out.println("4. Withdraw Transaction");
-        System.out.println("5. Transfer Money");
-        System.out.println("6. Display Account Information");
-        System.out.println("7. Close Account");
-        System.out.println("8. Exit");
+        System.out.println("\n[1] Create Account");
+        System.out.println("[2] Balance Inquiry");
+        System.out.println("[3] Deposit Transaction");
+        System.out.println("[4] Withdraw Transaction");
+        System.out.println("[5] Transfer Money");
+        System.out.println("[6] Display Account Information");
+        System.out.println("[7] Close Account");
+        System.out.println("[8] Exit");
     }
 
     private int selectMenuOption(int max) {
