@@ -5,14 +5,17 @@ import models.CheckingAccount;
 import models.CreditCardAccount;
 import models.InvestmentAccount;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BankController {
-    public CheckingAccount[] checkingAccounts = new CheckingAccount[10];
-    public CreditCardAccount[] creditCardAccounts = new CreditCardAccount[10];
-    public InvestmentAccount[] investmentAccounts = new InvestmentAccount[10];
 
-    public static void main(String[] args) {
+    private final Scanner scanner = new Scanner(System.in);
+    public ArrayList<CheckingAccount> checkingAccounts;
+    public ArrayList<InvestmentAccount> investmentAccounts;
+    public ArrayList<CreditCardAccount> creditCardAccounts;
+
+    public void start() {
         boolean running = true;
 
         do {
@@ -21,7 +24,7 @@ public class BankController {
             showArrayMenu();
 
             switch (selectMenuOption(8)) {
-                case 1 -> createAccount();
+                case 1 -> accountCreationMenu();
                 case 2 -> balanceInquiry();
                 case 3 -> deposit();
                 case 4 -> withdraw();
@@ -33,81 +36,105 @@ public class BankController {
         } while (running);
     }
 
-    private static void createAccount() {
+    private void createAccount(String type) {
+        System.out.println("Name: ");
+        String name = scanner.nextLine();
+
+        switch (type) {
+            case "Checking" -> {
+                CheckingAccount account = new CheckingAccount(name);
+                checkingAccounts.add(account);
+            }
+            case "Credit" -> {
+                CreditCardAccount account = new CreditCardAccount(name);
+                creditCardAccounts.add(account);
+            }
+            case "Investment" -> {
+                InvestmentAccount account = new InvestmentAccount(name);
+                investmentAccounts.add(account);
+            }
+        }
+    }
+
+
+    private void accountCreationMenu() {
         boolean backToMainMenu = false;
         do {
             showAccountCreationMenu();
 
             switch (selectMenuOption(4)) {
-                case 1 -> createAccount("Checking");
-                case 2 -> createAccount("CreditCard");
-                case 3 -> createAccount("Investment");
+                case 1 -> createCheckingAccount();
+                case 2 -> createCreditCardAccount();
+                case 3 -> createInvestmentAccount();
                 case 4 -> backToMainMenu = true;
             }
         } while (!backToMainMenu);
     }
 
-    private static void createAccount(String type) {
-        System.out.println("\nCHECKING ACCOUNT CREATION");
+    private void createInvestmentAccount() {
+        InvestmentAccount newAccount = new InvestmentAccount();
+        newAccount.setAccountName(scanner.nextLine());
 
-        String firstName = getStringInput("First Name: ");
-        String lastName = getStringInput("Last Name: ");
-        String name = firstName + " " + lastName;
-
-        BankAccount account = null;
-        switch (type) {
-            case "Checking" -> account = new CheckingAccount(name);
-            case "CreditCard" -> account = new CreditCardAccount(name);
-            case "Investment" -> account = new InvestmentAccount(name);
-        }
-        addAccount(account, type);
+        investmentAccounts.add(newAccount);
     }
 
-    private static void addAccount(BankAccount account, String type) {
-        // TODO
+    private void createCreditCardAccount() {
+        System.out.println("Name: ");
+        CreditCardAccount newAccount = new CreditCardAccount();
+        newAccount.setAccountName(scanner.nextLine());
+
+        creditCardAccounts.add(newAccount);
     }
 
-    private static void showAccountCreationMenu() {
+    private void createCheckingAccount() {
+        System.out.print("Name: ");
+        CheckingAccount newAccount = new CheckingAccount();
+        newAccount.setAccountName(scanner.nextLine());
+
+        checkingAccounts.add(newAccount);
+    }
+
+    private void showAccountCreationMenu() {
         System.out.println("\nSELECT ACCOUNT TYPE");
 
-        System.out.println("\n1. Checking Account");
-        System.out.println("2. Credit Card Account");
-        System.out.println("3. Investment Account");
-        System.out.println("4. Back to Main Menu");
+        System.out.println("\n[1] Checking Account");
+        System.out.println("[2] Credit Card Account");
+        System.out.println("[3] Investment Account");
+        System.out.println("[4] Back to Main Menu");
     }
 
-    private static void balanceInquiry() {
+    private void balanceInquiry() {
     }
 
-    private static void deposit() {
+    private void deposit() {
     }
 
-    private static void withdraw() {
+    private void withdraw() {
     }
 
-    private static void transferMoney() {
-
-    }
-
-    private static void displayAccount() {
+    private void transferMoney() {
 
     }
 
-    private static void closeAccount() {
+    private void displayAccount() {
+
     }
 
-    private static void showArrayMenu() {
-        System.out.println("\n1. Create Account");
-        System.out.println("2. Balance Inquiry");
-        System.out.println("3. Deposit Transaction");
-        System.out.println("4. Withdraw Transaction");
-        System.out.println("5. Transfer Money");
-        System.out.println("6. Display Account Information");
-        System.out.println("7. Close Account");
-        System.out.println("8. Exit");
+    private void closeAccount() {
     }
 
-    private static int selectMenuOption(int max) {
+    private void showArrayMenu() {
+        System.out.println("\n[1] Create Account");
+        System.out.println("[2] Balance Inquiry");
+        System.out.println("[3] Deposit Transaction");
+        System.out.println("[4] Withdraw Transaction");
+        System.out.println("[5] Transfer Money");
+        System.out.println("[6] Display Account Information");
+        System.out.println("[7] Close Account");
+        System.out.println("[8] Exit");
+    }
+
+    private int selectMenuOption(int max) {
         int input;
         do {
             input = getIntInput("\nSELECT OPTION: ");
@@ -119,17 +146,15 @@ public class BankController {
         return input;
     }
 
-    private static int getIntInput(String s) {
+    private int getIntInput(String s) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(s);
 
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private static String getStringInput(String s) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(s);
-
-        return scanner.nextLine();
+    public static void main(String[] args) {
+        BankController bankController = new BankController();
+        bankController.start();
     }
 }
