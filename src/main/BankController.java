@@ -50,23 +50,63 @@ public class BankController {
         String firstName = scanner.nextLine();
 
         String fullName = String.format("%s %s", lastName, firstName);
+        String pin = setupPin();
 
+        int accountNo = 0;
         switch (type) {
             case "Checking" -> {
-                CheckingAccount account = new CheckingAccount(fullName);
+                CheckingAccount account = new CheckingAccount(fullName, pin);
                 checkingAccounts.add(account);
+                System.out.println(account.getPin());
+                accountNo = account.getAccountNo();
             }
             case "Credit" -> {
-                CreditCardAccount account = new CreditCardAccount(fullName);
+                CreditCardAccount account = new CreditCardAccount(fullName, pin);
                 creditCardAccounts.add(account);
+                accountNo = account.getAccountNo();
             }
             case "Investment" -> {
-                InvestmentAccount account = new InvestmentAccount(fullName);
+                InvestmentAccount account = new InvestmentAccount(fullName, pin);
                 investmentAccounts.add(account);
+                accountNo = account.getAccountNo();
             }
         }
 
         System.out.println("\nAccount Created!");
+        System.out.println(fullName);
+        System.out.println(accountNo);
+    }
+
+    private String setupPin() {
+        String pin1;
+        String pin2;
+
+        while (true) {
+            pin1 = inputPin("PIN: ");
+
+            pin2 = inputPin("Confirm your PIN: ");
+
+            if (!pin1.equals(pin2)) {
+                System.out.println("PIN does not match.");
+                continue;
+            }
+
+            return pin1;
+        }
+    }
+
+    private String inputPin(String s) {
+        String pin;
+        do {
+            System.out.print(s);
+            pin = scanner.nextLine();
+
+            if (pin.length() != 6) {
+                System.out.println("PIN must be 6 digits.");
+            }
+        } while (pin.length() != 6);
+
+        return pin;
     }
 
     private void accountCreationMenu() {
@@ -92,7 +132,26 @@ public class BankController {
     }
 
     private void balanceInquiry() {
+        System.out.println("\n======================");
+        System.out.println("\nBALANCE INQUIRY");
 
+        System.out.print("\nAccount Number: ");
+        int accountNumber = Integer.parseInt(scanner.nextLine());
+
+        String pin = inputPin("PIN: ");
+
+        for (CheckingAccount account : checkingAccounts) {
+            if (account.getAccountNo() == accountNumber) {
+                if (account.getPin().equals(pin)) {
+                    System.out.println(account);
+                } else {
+                    System.out.println("Incorrect PIN.");
+                }
+                return;
+            }
+        }
+
+        System.out.println("Account not found.");
     }
 
     private void deposit() {

@@ -1,6 +1,4 @@
 package models;
-import java.sql.SQLOutput;
-import java.util.Scanner;
 
 public class BankAccount {
 
@@ -16,7 +14,6 @@ public class BankAccount {
         accountName = "";
         balance = 0.0;
         status = "Active";
-        pin = setupPin();
     }
 
     public BankAccount(String accountName) {
@@ -24,22 +21,28 @@ public class BankAccount {
         this.accountName = accountName;
         this.balance = 0.0;
         this.status = "Active";
-        pin = setupPin();
     }
+
+    public BankAccount(String accountName, String pin) {
+        this.accountNo = nextAccountNumber++;
+        this.accountName = accountName;
+        this.balance = 0.0;
+        this.status = "Active";
+        this.pin = pin;
+    }
+
 
     public BankAccount(int accountNo, String accountName) {
         this.accountNo = accountNo;
         this.accountName = accountName;
         balance = 0.0;
         status = "Active";
-        pin = setupPin();
     }
   
     public BankAccount(int accountNo, String accountName, String status) {
         this.accountNo = accountNo;
         this.accountName = accountName;
         this.status = status;
-        pin = setupPin();
     }
 
     public void setAccountNo(int accountNo) {
@@ -66,8 +69,12 @@ public class BankAccount {
         return accountName;
     }
 
+    public String getPin() {
+        return pin;
+    }
+
     public String toString() {
-        return "Account Created:\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
+        return "\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
     }
 
     public void deposit(double amount) {
@@ -114,7 +121,7 @@ public class BankAccount {
             }
         }
 
-        System.out.println("No such bank account found");
+        System.out.println("Account not found");
     }
 
     public void closeAccount() {
@@ -124,31 +131,6 @@ public class BankAccount {
         else {
             status = "Closed";
             System.out.print("This account has been closed");
-        }
-    }
-
-    private String setupPin() {
-        Scanner scanner = new Scanner(System.in);
-        String pin2;
-
-        while (true) {
-            System.out.print("PIN: ");
-            pin = scanner.nextLine();
-
-            System.out.print("Confirm your PIN: ");
-            pin2 = scanner.nextLine();
-
-            if (pin.length() != 6 || pin2.length() != 6) {
-                System.out.println("PIN must be 6 digits.");
-                continue;
-            }
-
-            if (!pin.equals(pin2)) {
-                System.out.println("PIN does not match.");
-                continue;
-            }
-
-            return pin;
         }
     }
 }
