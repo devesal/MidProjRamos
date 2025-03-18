@@ -1,4 +1,6 @@
 package models;
+import java.sql.SQLOutput;
+import java.util.Scanner;
 
 public class BankAccount {
 
@@ -7,12 +9,14 @@ public class BankAccount {
     private String accountName;
     private double balance;
     private String status;
+    private String pin;
 
     public BankAccount() {
         this.accountNo = nextAccountNumber++;
         accountName = "";
         balance = 0.0;
         status = "Active";
+        pin = setupPin();
     }
 
     public BankAccount(String accountName) {
@@ -20,6 +24,7 @@ public class BankAccount {
         this.accountName = accountName;
         this.balance = 0.0;
         this.status = "Active";
+        pin = setupPin();
     }
 
     public BankAccount(int accountNo, String accountName) {
@@ -27,12 +32,14 @@ public class BankAccount {
         this.accountName = accountName;
         balance = 0.0;
         status = "Active";
+        pin = setupPin();
     }
   
     public BankAccount(int accountNo, String accountName, String status) {
         this.accountNo = accountNo;
         this.accountName = accountName;
         this.status = status;
+        pin = setupPin();
     }
 
     public void setAccountNo(int accountNo) {
@@ -117,6 +124,31 @@ public class BankAccount {
         else {
             status = "Closed";
             System.out.print("This account has been closed");
+        }
+    }
+
+    private String setupPin() {
+        Scanner scanner = new Scanner(System.in);
+        String pin2;
+
+        while (true) {
+            System.out.print("PIN: ");
+            pin = scanner.nextLine();
+
+            System.out.print("Confirm your PIN: ");
+            pin2 = scanner.nextLine();
+
+            if (pin.length() != 6 || pin2.length() != 6) {
+                System.out.println("PIN must be 6 digits.");
+                continue;
+            }
+
+            if (!pin.equals(pin2)) {
+                System.out.println("PIN does not match.");
+                continue;
+            }
+
+            return pin;
         }
     }
 }
