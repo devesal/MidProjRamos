@@ -11,11 +11,10 @@ public class InvestmentAccount extends BankAccount {
 
     }
 
-    public InvestmentAccount(int accountNo, String accountName, double minimumBalance, double interest){
-        super(accountNo, accountName);
+    public InvestmentAccount(int accountNo, String accountName, String status, double minimumBalance, double interest){
+        super(accountNo, accountName, "active");
         this.minimumBalance = minimumBalance;
         this.interest = interest;
-        String status = getStatus();
     }
 
     public double getMinimumBalance() {
