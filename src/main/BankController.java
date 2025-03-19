@@ -5,6 +5,7 @@ import models.CheckingAccount;
 import models.CreditCardAccount;
 import models.InvestmentAccount;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -108,18 +109,33 @@ public class BankController {
         return String.format("%s %s", lastName, firstName);
     }
 
-    private int inputAccountNo() { // SHOULD NOT ALLOW DUPLICATE ACCOUNT NUMBERS
-        int input;
+    private int inputAccountNo() {
         while (true) {
-            input = getIntInput("Account Number: ");
+            int input = getIntInput("Account Number: ");
 
-            if (String.valueOf(input).length() == 9) {
-                return input;
+            if (String.valueOf(input).length() != 9) {
+                System.out.println("\n❌ Account number must be exactly 9 digits. Try again.");
+                continue;
             }
 
-            System.out.println("\nAccount number must be 9 digits.");
+            if (isDuplicateAccountNumber(input)) {
+                System.out.println("\n❌ Account number already exists. Try a different one.");
+                continue;
+            }
+
+            return input;
         }
     }
+
+    private boolean isDuplicateAccountNumber(int accountNo) {
+        for (BankAccount account : bankAccounts) {
+            if (account.getAccountNo() == accountNo) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void createAccount(String type) {
         System.out.println("\n=======================");
