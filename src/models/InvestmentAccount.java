@@ -1,9 +1,11 @@
 package models;
 
+import java.util.ArrayList;
+
 public class InvestmentAccount extends BankAccount {
 
     private double minimumBalance;
-    private double interest;
+    private final double interest;
 
     public InvestmentAccount() {
         minimumBalance = 0.0;
@@ -24,6 +26,11 @@ public class InvestmentAccount extends BankAccount {
         return interest;
     }
 
+    @Override
+    public String displayAccountType() {
+        return "Investment Account";
+    }
+
     public void addInvestment(double amount) {
         super.deposit(amount);
     }
@@ -33,7 +40,8 @@ public class InvestmentAccount extends BankAccount {
         System.out.println("Your investment value is: " + investmentValue);
     }
 
-    public void transferMoney(int accountNo, double amount, BankAccount[]listOfBankAccounts) {
+    @Override
+    public void transferMoney(int accountNo, double amount, ArrayList<BankAccount> bankAccounts) {
         System.out.println("You cannot transfer money from an investment account.");
     }
 
@@ -44,13 +52,16 @@ public class InvestmentAccount extends BankAccount {
     }
 
     @Override
-    public void closeAccount() {
+    public void closeAccount(ArrayList<BankAccount> bankAccounts) {
         double finalBalance = super.inquireBalance() * (1 + interest);
+
         if (finalBalance > 0) {
             super.withdraw(finalBalance);
         } else {
             System.out.println("There is no balance to withdraw.");
         }
+
+        bankAccounts.remove(this);
         super.setStatus("Closed");
         System.out.println("Your account has been closed.");
     }

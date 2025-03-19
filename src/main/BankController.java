@@ -5,7 +5,6 @@ import models.CheckingAccount;
 import models.CreditCardAccount;
 import models.InvestmentAccount;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,14 +42,13 @@ public class BankController {
 
             displayMainMenu();
 
-            switch (selectMenuOption(8)) {
+            switch (selectMenuOption(6)) {
                 case 1 -> balanceInquiry();
-                case 2 -> deposit();
-                case 3 -> withdraw();
-                case 4 -> transferMoney();
-                case 5 -> displayAccount();
-                case 6 -> closeAccount();
-                case 7 -> running = false;
+                case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
+                case 3 -> currentAccount.withdraw(getIntInput("Enter amount to withdraw: "));
+                case 4 -> currentAccount.transferMoney(getIntInput("\nTransfer Amount: "), inputAccountNo(), bankAccounts);
+                case 5 -> currentAccount.closeAccount(bankAccounts);
+                case 6 -> running = false;
             }
         }
     }
@@ -58,19 +56,19 @@ public class BankController {
     private void signIn() {
         System.out.println("\n=======================");
         System.out.println("\nSIGN IN");
-        int accountNo = getIntInput("\nAccount Number: ");
 
-        for (BankAccount account : bankAccounts) {
-            if (account.getAccountNo() == accountNo) {
-                currentAccount = account;
-                System.out.println("Login successful!");
-                // Proceed to account menu
-                return;
+        while (true) {
+            int accountNo = getIntInput("\nAccount Number: ");
+            for (BankAccount account : bankAccounts) {
+                if (account.getAccountNo() == accountNo) {
+                    currentAccount = account;
+                    System.out.println("Login successful!");
+                    // Proceed to account menu
+                    return;
+                }
             }
+            System.out.println("Incorrect account number");
         }
-
-        System.out.println("\nIncorrect account number");
-        goBack();
     }
 
     private void displayAuthMenu() {
@@ -118,11 +116,6 @@ public class BankController {
                 continue;
             }
 
-            if (isDuplicateAccountNumber(input)) {
-                System.out.println("\n❌ Account number already exists. Try a different one.");
-                continue;
-            }
-
             return input;
         }
     }
@@ -142,16 +135,22 @@ public class BankController {
         System.out.println("\nCREATE ACCOUNT");
 
         String name = inputName();
-        int accountNo = inputAccountNo();
+        int accountNo;
+
+        while (true) {
+            accountNo = inputAccountNo();
+
+            if (isDuplicateAccountNumber(accountNo)) {
+                System.out.println("\n❌ Account number already exists. Try a different one.");
+                continue;
+            }
+            break;
+        }
 
         switch (type) {
             case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  0.0));
-
             case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 0.0, 100000));
-
             case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 50000, 3.5));
-
-            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
 
         System.out.println("\nAccount Created!");
@@ -173,26 +172,9 @@ public class BankController {
         System.out.println(currentAccount);
     }
 
-    private void deposit() {
-    }
-
-    private void withdraw() {
-    }
-
-    private void transferMoney() {
-
-    }
-
-    private void displayAccount() {
-
-    }
-
-    private void closeAccount() {
-    }
-
     private void displayMainMenu() {
         System.out.println("\n=======================");
-        System.out.println("\n#" + currentAccount.getAccountNo() + "\n");
+        System.out.println("\n#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
 
         System.out.println("[1] Balance Inquiry");
         System.out.println("[2] Deposit Transaction");
@@ -216,28 +198,28 @@ public class BankController {
         }
     }
 
-    private int getIntInput(String s) {
+    private int getIntInput(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print(s);
+        int input;
 
-        int input = 0;
-        try {
+        while (true) {
+            System.out.print(message);
 
-            while (true) {
+            try {
                 input = Integer.parseInt(scanner.nextLine());
 
                 if (input > 0) {
-                    break;
+                    return input;
+                } else {
+                    System.out.println("❌ Input must be a positive integer.");
                 }
-                System.out.println("Input must be a positive integer.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Invalid input. Please enter a valid number.");
             }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number");
         }
-
-        return input;
     }
+
 
     public static void main(String[] args) {
         BankController bankController = new BankController();
