@@ -135,8 +135,7 @@ public class BankController {
         System.out.println("\n======================");
         System.out.println("\nBALANCE INQUIRY");
 
-        System.out.print("\nAccount Number: ");
-        int accountNumber = Integer.parseInt(scanner.nextLine());
+        int accountNumber = getIntInput("Account Number: ");
 
         String pin = inputPin("PIN: ");
 
@@ -185,26 +184,28 @@ public class BankController {
     private int selectMenuOption(int max) {
         int input;
         while (true) {
+            System.out.println("\n=======================");
+
+            input = getIntInput("\nSELECT OPTION: ");
+            if (input >= 1 && input <= max) {
+                return input;
+            }
+
+            System.out.println("Invalid option. Please enter a number between 1 and " + max + ".");
+        }
+    }
+
+    private int getIntInput(String s) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
             try {
-                System.out.println("\n=======================");
-                input = getIntInput("\nSELECT OPTION: ");
-                if (input >= 1 && input <= max) {
-                    return input;
-                }
-
-                System.out.println("Invalid option. Please enter a number between 1 and " + max + ".");
-
+                System.out.print(s);
+                return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
             }
         }
-    }
-
-    private int getIntInput(String s) throws NumberFormatException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(s);
-
-        return Integer.parseInt(scanner.nextLine());
     }
 
     public static void main(String[] args) {
