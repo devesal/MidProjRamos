@@ -7,7 +7,6 @@ public class BankAccount {
     private String accountName;
     private double balance;
     private String status;
-    private String pin;
 
     public BankAccount() {
         this.accountNo = nextAccountNumber++;
@@ -16,29 +15,13 @@ public class BankAccount {
         status = "Active";
     }
 
-    public BankAccount(String accountName) {
-        this.accountNo = nextAccountNumber++;
-        this.accountName = accountName;
-        this.balance = 0.0;
-        this.status = "Active";
-    }
-
-    public BankAccount(String accountName, String pin) {
-        this.accountNo = nextAccountNumber++;
-        this.accountName = accountName;
-        this.balance = 0.0;
-        this.status = "Active";
-        this.pin = pin;
-    }
-
-
     public BankAccount(int accountNo, String accountName) {
         this.accountNo = accountNo;
         this.accountName = accountName;
         balance = 0.0;
         status = "Active";
     }
-  
+
     public BankAccount(int accountNo, String accountName, String status) {
         this.accountNo = accountNo;
         this.accountName = accountName;
@@ -67,10 +50,6 @@ public class BankAccount {
 
     public String getAccountName() {
         return accountName;
-    }
-
-    public String getPin() {
-        return pin;
     }
 
     public String toString() {
