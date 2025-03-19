@@ -11,14 +11,6 @@ public class CreditCardAccount extends BankAccount {
         charges = 0.0;
     }
 
-    public CreditCardAccount(String accountName) {
-        super(accountName);
-    }
-
-    public CreditCardAccount(String accountName, String pin) {
-        super(accountName, pin);
-    }
-
     public CreditCardAccount(int accountNo, String accountName, double creditLimit, double charges) {
         super(accountNo, accountName);
         this.creditLimit = creditLimit;
