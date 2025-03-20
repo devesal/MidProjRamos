@@ -49,7 +49,6 @@ public class InvestmentAccount extends BankAccount {
         } else {
             System.out.println("❌ There is no balance to withdraw.");
         }
-
         bankAccounts.remove(this);
         super.setStatus("Closed");
         System.out.println("Your account has been closed.");

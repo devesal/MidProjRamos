@@ -63,10 +63,8 @@ public class BankAccount {
     public void withdraw(double amount) {
         if (balance >= amount) {
             this.balance = balance - amount;
-            System.out.println("Money has been withdrawn from your account");
-            System.out.println("Please check your account for safety measures");
-        }
-        if (balance < amount) {
+            System.out.println("Money withdrawn: ₱" + amount);
+        } else {
             System.out.println("❌ Insufficient balance. Transaction terminated");
         }
     }
@@ -89,13 +87,14 @@ public class BankAccount {
 
     public void closeAccount(ArrayList<BankAccount> bankAccounts) {
         if (balance > 0) {
-            System.out.println("❌ Please withdraw your remaining balance before closing your account");
+            withdraw(balance);
         }
         else {
-            bankAccounts.remove(this);
-            status = "Closed";
-            System.out.println("This account has been closed");
+            System.out.println("❌ There is no balance to withdraw");
         }
+        bankAccounts.remove(this);
+        status = "Closed";
+        System.out.println("This account has been closed");
     }
 
     public String displayAccountType() {

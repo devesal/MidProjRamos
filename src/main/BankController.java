@@ -257,7 +257,7 @@ public class BankController {
         }
 
         switch (type) {
-            case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  0.0));
+            case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  5000.0));
             case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 0.0, 100000));
             case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 50000, 3.5));
         }
