@@ -268,7 +268,7 @@ public class BankController {
         System.out.println("[4] Back to Main Menu");
     }
     /**
-     * Prompts the user for their first and last name and returns it as a formatted string.
+     * Prompts the user for their first and last name and returns it as a string.
      *
      * @return A string containing the user's full name.
      */
@@ -430,7 +430,7 @@ public class BankController {
     }
     /**
      * The main method to run the banking system.
-     * @param args Command-line arguments.
+     * @param args Command-line.
      */
     public static void main(String[] args) {
         BankController bankController = new BankController();
