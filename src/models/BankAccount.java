@@ -1,3 +1,4 @@
+package models;
 /**
  * Midterm Project: User-defined Reference Classes, Inheritance, and Exception Handling
  * Represents a bank account with basic functionalities such as deposit, withdrawal,
@@ -11,7 +12,6 @@
  * @version 1.0
  * @date 3/20/2025
  */
-package models;
 
 import java.util.ArrayList;
 

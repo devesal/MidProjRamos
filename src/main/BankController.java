@@ -1,3 +1,4 @@
+package main;
 /**
  * Midterm Project: User-defined Reference Classes, Inheritance, and Exception Handling
  * The BankController class manages the overall banking system operations,
@@ -11,7 +12,6 @@
  * @version 1.0
  * @date 3/20/2025
  */
-package main;
 
 import models.BankAccount;
 import models.CheckingAccount;
