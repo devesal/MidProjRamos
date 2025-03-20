@@ -1,4 +1,5 @@
 /**
+ * Midterm Project: User-defined Reference Classes, Inheritance, and Exception Handling
  * The BankController class manages the overall banking system operations,
  * including user authentication, account creation, transactions, and menu navigation.
  * @author AQUINO, THEO JAMES CORONEZA

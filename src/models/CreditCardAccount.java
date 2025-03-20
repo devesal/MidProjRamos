@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 /**
+ * Midterm Project: User-defined Reference Classes, Inheritance, and Exception Handling
  * Represents a credit card account, extending the BankAccount class.
  * Allows users to manage charges, payments, credit limit, and cash advances.
  * @author AQUINO, THEO JAMES CORONEZA

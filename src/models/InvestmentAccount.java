@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 
 /**
+ * Midterm Project: User-defined Reference Classes, Inheritance, and Exception Handling
  * Represents an Investment Account, which extends the functionality of a Bank Account.
  * It includes features such as a minimum balance requirement and an interest rate.
  * @author AQUINO, THEO JAMES CORONEZA

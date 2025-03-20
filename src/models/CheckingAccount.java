@@ -1,6 +1,7 @@
 package models;
 
 /**
+ * Midterm Project: User-defined Reference Classes, Inheritance, and Exception Handling
  * Represents a Checking Account, which extends the BankAccount class.
  * This account requires a minimum balance and allows check encashment.
  * @author AQUINO, THEO JAMES CORONEZA

@@ -1,4 +1,5 @@
 /**
+ * Midterm Project: User-defined Reference Classes, Inheritance, and Exception Handling
  * Represents a bank account with basic functionalities such as deposit, withdrawal,
  * balance inquiry, money transfer, and account closure.
  * @author AQUINO, THEO JAMES CORONEZA
