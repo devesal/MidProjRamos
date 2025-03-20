@@ -31,7 +31,7 @@ public class InvestmentAccount extends BankAccount {
      */
     public InvestmentAccount() {
         minimumBalance = 0.0;
-        interest = 0.0;
+        interest = 5000.0;
     }
 
     /**

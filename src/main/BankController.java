@@ -54,7 +54,10 @@ public class BankController {
                 switch (selectMenuOption(3)) {
                     case 1 -> isSignedIn = signIn();
                     case 2 -> displayAccCreationMenu();
-                    case 3 -> running = false;
+                    case 3 -> {
+                        System.out.println("\nThank you for using Co-Pals Bank!");
+                        System.exit(0);
+                    }
                 }
             } while (!isSignedIn);
 
@@ -349,12 +352,22 @@ public class BankController {
      * @return The formatted full name (firstName + " " + lastName)
      */
     private String inputName() {
-        System.out.print("\nFirst Name: ");
-        String firstName = scanner.nextLine();
-        System.out.print("Last Name: ");
-        String lastName = scanner.nextLine();
-
-        return String.format("%s %s", firstName, lastName);
+        while (true) {
+            System.out.print("\nFirst Name: ");
+            String firstName = scanner.nextLine().trim();
+            System.out.print("Last Name: ");
+            String lastName = scanner.nextLine().trim();
+            
+            if (firstName.isEmpty() || lastName.isEmpty()) {
+                System.out.println("❌ Name cannot be empty");
+                continue;
+            }
+            if (!firstName.matches("[a-zA-Z ]+") || !lastName.matches("[a-zA-Z ]+")) {
+                System.out.println("❌ Name can only contain letters");
+                continue;
+            }
+            return String.format("%s %s", firstName, lastName);
+        }
     }
 
     /**
@@ -406,9 +419,9 @@ public class BankController {
 
         switch (type) {
             case "Savings" -> bankAccounts.add(new BankAccount(accountNo, name));
-            case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  0.0));
+            case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  500.0));
             case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 25000, 0));
-            case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 500, 0.35));
+            case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 5000, 0.35));
         }
 
         System.out.println("\n======================");

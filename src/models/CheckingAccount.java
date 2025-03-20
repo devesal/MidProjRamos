@@ -26,7 +26,7 @@ public class CheckingAccount extends BankAccount {
      */
     public CheckingAccount() {
         super();
-        this.minimumBalance = 5000.0;
+        this.minimumBalance = 500.0;
     }
 
     /**
