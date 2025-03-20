@@ -6,7 +6,7 @@ public class CheckingAccount extends BankAccount {
 
     public CheckingAccount() {
         super();
-        this.minimumBalance = 0.0; // TODO: Think of a default minimum balance
+        this.minimumBalance = 5000.0;
     }
 
     public CheckingAccount(int accountNo, String accountName, double minimumBalance) {
@@ -16,11 +16,6 @@ public class CheckingAccount extends BankAccount {
 
     public double getMinimumBalance() {
         return minimumBalance;
-    }
-
-    @Override
-    public void withdraw(double amount) {
-        System.out.println("❌ Withdrawal is not allowed with a checking account");
     }
 
     @Override
