@@ -1,29 +1,59 @@
 package models;
 
+/**
+ * Represents a Checking Account, which extends the BankAccount class.
+ * This account requires a minimum balance and allows check encashment.
+ */
 public class CheckingAccount extends BankAccount {
 
+    /** The minimum balance required for the account. */
     public double minimumBalance;
 
+    /**
+     * Default constructor initializing a Checking Account with a default minimum balance of ₱5000.0.
+     */
     public CheckingAccount() {
         super();
         this.minimumBalance = 5000.0;
     }
 
+    /**
+     * Parameterized constructor for initializing a Checking Account with custom values.
+     *
+     * @param accountNo The account number.
+     * @param accountName The name associated with the account.
+     * @param minimumBalance The minimum balance required for the account.
+     */
     public CheckingAccount(int accountNo, String accountName, double minimumBalance) {
         super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
     }
 
+    /**
+     * Retrieves the minimum balance required for the account.
+     *
+     * @return The minimum balance.
+     */
     public double getMinimumBalance() {
         return minimumBalance;
     }
 
+    /**
+     * Displays the type of account.
+     *
+     * @return A string representing the account type.
+     */
     @Override
     public String displayAccountType() {
         return "Checking Account";
     }
 
-    public void encashCheck (double amount) {
+    /**
+     * Allows encashment of a check if the balance meets the minimum requirement.
+     *
+     * @param amount The amount to be encashed.
+     */
+    public void encashCheck(double amount) {
         double currentBalance = super.inquireBalance();
 
         if (amount > currentBalance) {
