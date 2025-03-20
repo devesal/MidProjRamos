@@ -131,7 +131,6 @@ public class BankController {
     }
 
     private boolean selectCheckingAccOptions() {
-
         switch (selectMenuOption(6)) {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
@@ -139,6 +138,7 @@ public class BankController {
             case 4 -> currentAccount.transferMoney(inputAccountNo(), getDoubleInput("\nTransfer Amount: "), bankAccounts);
             case 5 -> {
                 currentAccount.closeAccount(bankAccounts);
+                goBack();
                 return false;
             }
             case 6 -> {
@@ -156,7 +156,11 @@ public class BankController {
             case 3 -> ((CreditCardAccount) currentAccount).payCard(getDoubleInput("Enter amount to pay: "));
             case 4 -> ((CreditCardAccount) currentAccount).inquireAvailableCredit();
             case 5 -> ((CreditCardAccount) currentAccount).chargeToCard(getDoubleInput("Enter amount to charge: "));
-            case 6 -> currentAccount.closeAccount(bankAccounts);
+            case 6 -> {
+                currentAccount.closeAccount(bankAccounts);
+                goBack();
+                return false;
+            }
             case 7 -> {
                 return false;
             }
@@ -171,7 +175,11 @@ public class BankController {
             case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
             case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getDoubleInput("Enter amount to invest: "));
             case 4 -> inquireInvestmentValue();
-            case 5 -> currentAccount.closeAccount(bankAccounts);
+            case 5 -> {
+                currentAccount.closeAccount(bankAccounts);
+                goBack();
+                return false;
+            }
             case 6 -> {
                 return false;
             }
