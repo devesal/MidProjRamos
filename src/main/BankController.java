@@ -117,15 +117,15 @@ public class BankController {
     private boolean displayCCAccMenu() {
         System.out.println("\n=======================");
         System.out.println("\n" + currentAccount.getAccountName());
-        System.out.println(currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
+        System.out.println(currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType());
+        System.out.println("Credit Limit: ₱" + ((CreditCardAccount) currentAccount).getCreditLimit() + "\n");
 
-        System.out.println("[1] Balance Inquiry");
-        System.out.println("[2] Deposit Transaction");
+        System.out.println("[1] Inquire Available Credit");
+        System.out.println("[2] Cash Advance");
         System.out.println("[3] Pay Card");
-        System.out.println("[4] Inquire Available Credit");
-        System.out.println("[5] Charge to Card");
-        System.out.println("[6] Close Account");
-        System.out.println("[7] Exit");
+        System.out.println("[4] Charge to Card");
+        System.out.println("[5] Close Account");
+        System.out.println("[6] Exit");
 
         return selectCCAccOptions();
     }
@@ -150,18 +150,17 @@ public class BankController {
     }
 
     private boolean selectCCAccOptions() {
-        switch (selectMenuOption(7)) {
-            case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
+        switch (selectMenuOption(5)) {
+            case 1 -> ((CreditCardAccount) currentAccount).inquireAvailableCredit();
+            case 2 -> ((CreditCardAccount) currentAccount).getCashAdvance(getDoubleInput("Enter cash advance amount: "));
             case 3 -> ((CreditCardAccount) currentAccount).payCard(getDoubleInput("Enter amount to pay: "));
-            case 4 -> ((CreditCardAccount) currentAccount).inquireAvailableCredit();
-            case 5 -> ((CreditCardAccount) currentAccount).chargeToCard(getDoubleInput("Enter amount to charge: "));
-            case 6 -> {
+            case 4 -> ((CreditCardAccount) currentAccount).chargeToCard(getDoubleInput("Enter amount to charge: "));
+            case 5 -> {
                 currentAccount.closeAccount(bankAccounts);
                 goBack();
                 return false;
             }
-            case 7 -> {
+            case 6 -> {
                 return false;
             }
         }
@@ -260,7 +259,7 @@ public class BankController {
 
         switch (type) {
             case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  0.0));
-            case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 0.0, 100000));
+            case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 25000, 0));
             case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 500, 0.35));
         }
 

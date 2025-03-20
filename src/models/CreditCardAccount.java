@@ -31,8 +31,13 @@ public class CreditCardAccount extends BankAccount {
 
     // TODO: Handle input validation in main method
     public void payCard(double amount) {
-        charges -= amount;
-        System.out.println("Payment successful! Your remaining balance is: ₱" + charges);
+        if (amount > charges) {
+            System.out.println("❌ Payment exceeds total charges");
+            return;
+        } else {
+            charges -= amount;
+            System.out.println("Payment successful! Your remaining balance is: ₱" + charges);
+        }
     }
 
     public void inquireAvailableCredit() {
@@ -60,7 +65,7 @@ public class CreditCardAccount extends BankAccount {
         availableCredit = availableCredit * 0.5;
         if (amount < availableCredit) {
             charges += amount;
-            System.out.println("Cash advance approved! Your new total balance is: ₱" + charges);
+            System.out.println("Cash advance approved! You have been charged: ₱" + amount);
         } else {
             System.out.println("❌ Transaction declined: Requested cash advance exceeds your available credit.");
         }
@@ -71,5 +76,20 @@ public class CreditCardAccount extends BankAccount {
         return "Account No: " + getAccountNo() + "\nAccount Name: " +
                 getAccountName() + "\nCredit Limit: " + creditLimit +
                 "\nCharges: " + charges;
+    }
+
+    @Override
+    public void closeAccount(ArrayList<BankAccount> bankAccounts) {
+
+        if (charges == 0) {
+            System.out.println("Congratulations! You have achieved a Great Credit Score!");
+        } else {
+            System.out.println("❌ Please settle your remaining balance before closing your account");
+            return;
+        }
+
+        bankAccounts.remove(this);
+        super.setStatus("Closed");
+        System.out.println("Your account has been closed.");
     }
 }
