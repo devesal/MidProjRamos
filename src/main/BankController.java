@@ -42,6 +42,8 @@ public class BankController {
                     staySignedIn = displayCCAccMenu();
                 } else if (currentAccount instanceof InvestmentAccount) {
                     staySignedIn = displayInvestmentAccMenu();
+                } else {
+                    staySignedIn = displaySavingsAccountMenu();
                 }
             }
         }
@@ -58,11 +60,12 @@ public class BankController {
     private void displayAccCreationMenu() {
         showAccountCreationOptions();
 
-        switch (selectMenuOption(4)) {
-            case 1 -> createAccount("Checking");
-            case 2 -> createAccount("Credit");
-            case 3 -> createAccount("Investment");
-            case 4 -> {return;}
+        switch (selectMenuOption(5)) {
+            case 1 -> createAccount("Savings");
+            case 2 -> createAccount("Checking");
+            case 3 -> createAccount("Credit");
+            case 4 -> createAccount("Investment");
+            case 5 -> {return;}
         }
     }
 
@@ -97,6 +100,42 @@ public class BankController {
             }
         }
         return false;
+    }
+
+    private boolean displaySavingsAccountMenu() {
+        System.out.println("\n=======================");
+        System.out.println("\n" + currentAccount.getAccountName());
+        System.out.println(currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType() + "\n");
+
+        System.out.println("[1] Balance Inquiry");
+        System.out.println("[2] Deposit Transaction");
+        System.out.println("[3] Withdraw Transaction");
+        System.out.println("[4] Transfer Money");
+        System.out.println("[5] Display Account Information");
+        System.out.println("[6] Close Account");
+        System.out.println("[7] Exit");
+
+        return selectSavingsAccOptions();
+    }
+
+    private boolean selectSavingsAccOptions() {
+        switch (selectMenuOption(7)) {
+            case 1 -> balanceInquiry();
+            case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
+            case 3 -> currentAccount.withdraw(getDoubleInput("Enter amount to withdraw: "));
+            case 4 -> currentAccount.transferMoney(inputAccountNo(), getDoubleInput("\nTransfer Amount: "), bankAccounts);
+            case 5 -> System.out.println(currentAccount.toString());
+            case 6 -> {
+                currentAccount.closeAccount(bankAccounts);
+                goBack();
+                return false;
+            }
+            case 7 -> {
+                return false;
+            }
+        }
+        goBack();
+        return true;
     }
 
     private boolean displayCheckingAccMenu() {
@@ -210,10 +249,11 @@ public class BankController {
         System.out.println("\n=====================");
         System.out.println("\nSELECT ACCOUNT TYPE");
 
-        System.out.println("\n[1] Checking Account");
-        System.out.println("[2] Credit Card Account");
-        System.out.println("[3] Investment Account");
-        System.out.println("[4] Back to Main Menu");
+        System.out.println("\n[1] Savings Account");
+        System.out.println("[2] Checking Account");
+        System.out.println("[3] Credit Card Account");
+        System.out.println("[4] Investment Account");
+        System.out.println("[5] Back to Main Menu");
     }
 
     private String inputName() {
@@ -261,6 +301,7 @@ public class BankController {
         }
 
         switch (type) {
+            case "Savings" -> bankAccounts.add(new BankAccount(accountNo, name));
             case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  0.0));
             case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 25000, 0));
             case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 500, 0.35));
@@ -283,7 +324,7 @@ public class BankController {
         System.out.println("\n======================");
         System.out.println("\nBALANCE INQUIRY");
 
-        System.out.println("Your balance is ₱: " + currentAccount.inquireBalance());
+        System.out.println("Your balance is: ₱" + currentAccount.inquireBalance());
     }
 
     private void inquireInvestmentValue() {
