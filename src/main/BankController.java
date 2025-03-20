@@ -190,23 +190,23 @@ public class BankController {
     private boolean selectInvestmentAccOptions() {
         switch (selectMenuOption(8)) {
             case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
-            case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getDoubleInput("Enter amount to invest: "));
-            case 4 -> inquireInvestmentValue();
-            case 5 -> {
+            case 2 -> ((InvestmentAccount) currentAccount).addInvestment(getDoubleInput("Enter amount to invest: "));
+            case 3 -> inquireInvestmentValue();
+            case 4 -> {
                 currentAccount.closeAccount(bankAccounts);
                 goBack();
                 return false;
             }
             case 6 -> System.out.println(currentAccount.toString());
             case 7 -> {
+            case 5 -> {
                 return false;
             }
         }
         goBack();
         return true;
     }
-
+      
     private void showAccountCreationOptions() {
         System.out.println("\n=====================");
         System.out.println("\nSELECT ACCOUNT TYPE");
@@ -264,7 +264,7 @@ public class BankController {
         switch (type) {
             case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  5000.0));
             case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 0.0, 100000));
-            case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 50000, 3.5));
+            case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 500, 0.35));
         }
 
         System.out.println("\n======================");
