@@ -107,8 +107,9 @@ public class BankController {
         System.out.println("[1] Balance Inquiry");
         System.out.println("[2] Deposit Transaction");
         System.out.println("[3] Transfer Money");
-        System.out.println("[4] Close Account");
-        System.out.println("[5] Exit");
+        System.out.println("[4] Display Account Information");
+        System.out.println("[5] Close Account");
+        System.out.println("[6] Exit");
 
         return selectCheckingAccOptions();
     }
@@ -122,24 +123,42 @@ public class BankController {
         System.out.println("[2] Deposit Transaction");
         System.out.println("[3] Pay Card");
         System.out.println("[4] Inquire Available Credit");
-        System.out.println("[5] Charge to Card");
-        System.out.println("[6] Close Account");
-        System.out.println("[7] Exit");
+        System.out.println("[5] Display Account Information");
+        System.out.println("[6] Charge to Card");
+        System.out.println("[7] Close Account");
+        System.out.println("[8] Exit");
 
         return selectCCAccOptions();
     }
 
+    private boolean displayInvestmentAccMenu() {
+        System.out.println("\n=======================");
+
+        System.out.println("\nWelcome " + currentAccount.getAccountName() + "!");
+
+        System.out.println("[1] Balance Inquiry");
+        System.out.println("[2] Deposit Transaction");
+        System.out.println("[3] Add Investment");
+        System.out.println("[4] Inquire Investment Value");
+        System.out.println("[5] Display Account Information");
+        System.out.println("[6] Close Account");
+        System.out.println("[7] Exit");
+
+        return selectInvestmentAccOptions();
+    }
+
     private boolean selectCheckingAccOptions() {
-        switch (selectMenuOption(5)) {
+        switch (selectMenuOption(6)) {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
             case 3 -> currentAccount.transferMoney(inputAccountNo(), getDoubleInput("\nTransfer Amount: "), bankAccounts);
-            case 4 -> {
+            case 4 -> System.out.println(currentAccount.toString());
+            case 5 -> {
                 currentAccount.closeAccount(bankAccounts);
                 goBack();
                 return false;
             }
-            case 5 -> {
+            case 6 -> {
                 return false;
             }
         }
@@ -148,18 +167,19 @@ public class BankController {
     }
 
     private boolean selectCCAccOptions() {
-        switch (selectMenuOption(7)) {
+        switch (selectMenuOption(8)) {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
             case 3 -> ((CreditCardAccount) currentAccount).payCard(getDoubleInput("Enter amount to pay: "));
             case 4 -> ((CreditCardAccount) currentAccount).inquireAvailableCredit();
-            case 5 -> ((CreditCardAccount) currentAccount).chargeToCard(getDoubleInput("Enter amount to charge: "));
-            case 6 -> {
+            case 5 -> System.out.println(currentAccount.toString());
+            case 6 -> ((CreditCardAccount) currentAccount).chargeToCard(getDoubleInput("Enter amount to charge: "));
+            case 7 -> {
                 currentAccount.closeAccount(bankAccounts);
                 goBack();
                 return false;
             }
-            case 7 -> {
+            case 8 -> {
                 return false;
             }
         }
@@ -168,7 +188,7 @@ public class BankController {
     }
 
     private boolean selectInvestmentAccOptions() {
-        switch (selectMenuOption(5)) {
+        switch (selectMenuOption(8)) {
             case 1 -> balanceInquiry();
             case 2 -> ((InvestmentAccount) currentAccount).addInvestment(getDoubleInput("Enter amount to invest: "));
             case 3 -> inquireInvestmentValue();
@@ -177,6 +197,8 @@ public class BankController {
                 goBack();
                 return false;
             }
+            case 6 -> System.out.println(currentAccount.toString());
+            case 7 -> {
             case 5 -> {
                 return false;
             }
@@ -184,24 +206,7 @@ public class BankController {
         goBack();
         return true;
     }
-
-    private boolean displayInvestmentAccMenu() {
-        System.out.println("\n=======================");
-
-        System.out.println("\n" + currentAccount.getAccountName());
-        System.out.println("#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType());
-        System.out.println("Interest Rate: " + ((InvestmentAccount) currentAccount).getInterest() * 100 + "%");
-        System.out.println("Minimum Balance: ₱" + ((InvestmentAccount) currentAccount).getMinimumBalance() + "\n");
-
-        System.out.println("[1] Balance Inquiry");
-        System.out.println("[2] Add Investment");
-        System.out.println("[3] Inquire Investment Value");
-        System.out.println("[4] Close Account");
-        System.out.println("[5] Exit");
-
-        return selectInvestmentAccOptions();
-    }
-
+      
     private void showAccountCreationOptions() {
         System.out.println("\n=====================");
         System.out.println("\nSELECT ACCOUNT TYPE");
@@ -225,7 +230,7 @@ public class BankController {
         while (true) {
             int input = getIntInput("\nAccount Number: ");
 
-            if (input == 1) {
+            if (input == 1 && currentAccount == null) {
                 return input;
             }
 
