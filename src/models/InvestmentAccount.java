@@ -35,19 +35,26 @@ public class InvestmentAccount extends BankAccount {
         super.deposit(amount);
     }
 
+    public double inquireBalance() {
+        return super.inquireBalance() + minimumBalance;
+    }
+
     public double inquireInvestmentValue() {
-        double investmentValue = super.inquireBalance() * (1 + interest);
+        double investmentValue = inquireBalance() * (1 + interest);
+        System.out.println("Your interest rate is: " + interest * 100 + "%");
         return investmentValue;
     }
 
     @Override
     public void closeAccount(ArrayList<BankAccount> bankAccounts) {
-        double finalBalance = super.inquireBalance() * (1 + interest);
+        double finalBalance = inquireBalance() * (1 + interest);
 
-        if (finalBalance > 0) {
+        if (finalBalance > minimumBalance) {
             super.withdraw(finalBalance);
+            System.out.println("Investment has been withdrawn");
+            System.out.println("You have deposited ₱" + finalBalance + " and earned ₱" + (finalBalance - inquireBalance()));
         } else {
-            System.out.println("❌ There is no balance to withdraw.");
+            System.out.println("❌ You cannot withdraw the minimum balance");
         }
 
         bankAccounts.remove(this);

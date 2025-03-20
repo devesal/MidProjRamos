@@ -170,17 +170,16 @@ public class BankController {
     }
 
     private boolean selectInvestmentAccOptions() {
-        switch (selectMenuOption(6)) {
+        switch (selectMenuOption(5)) {
             case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
-            case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getDoubleInput("Enter amount to invest: "));
-            case 4 -> inquireInvestmentValue();
-            case 5 -> {
+            case 2 -> ((InvestmentAccount) currentAccount).addInvestment(getDoubleInput("Enter amount to invest: "));
+            case 3 -> inquireInvestmentValue();
+            case 4 -> {
                 currentAccount.closeAccount(bankAccounts);
                 goBack();
                 return false;
             }
-            case 6 -> {
+            case 5 -> {
                 return false;
             }
         }
@@ -192,14 +191,15 @@ public class BankController {
         System.out.println("\n=======================");
 
         System.out.println("\n" + currentAccount.getAccountName());
-        System.out.println("#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
+        System.out.println("#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType());
+        System.out.println("Interest Rate: " + ((InvestmentAccount) currentAccount).getInterest() * 100 + "%");
+        System.out.println("Minimum Balance: ₱" + ((InvestmentAccount) currentAccount).getMinimumBalance() + "\n");
 
         System.out.println("[1] Balance Inquiry");
-        System.out.println("[2] Deposit Transaction");
-        System.out.println("[3] Add Investment");
-        System.out.println("[4] Inquire Investment Value");
-        System.out.println("[5] Close Account");
-        System.out.println("[6] Exit");
+        System.out.println("[2] Add Investment");
+        System.out.println("[3] Inquire Investment Value");
+        System.out.println("[4] Close Account");
+        System.out.println("[5] Exit");
 
         return selectInvestmentAccOptions();
     }
@@ -261,7 +261,7 @@ public class BankController {
         switch (type) {
             case "Checking" -> bankAccounts.add(new CheckingAccount(accountNo, name,  0.0));
             case "Credit" -> bankAccounts.add(new CreditCardAccount(accountNo, name, 0.0, 100000));
-            case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 50000, 3.5));
+            case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 50000, 0.35));
         }
 
         System.out.println("\n======================");
