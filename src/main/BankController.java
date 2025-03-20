@@ -150,7 +150,7 @@ public class BankController {
     }
 
     private boolean selectCCAccOptions() {
-        switch (selectMenuOption(5)) {
+        switch (selectMenuOption(6)) {
             case 1 -> ((CreditCardAccount) currentAccount).inquireAvailableCredit();
             case 2 -> ((CreditCardAccount) currentAccount).getCashAdvance(getDoubleInput("Enter cash advance amount: "));
             case 3 -> ((CreditCardAccount) currentAccount).payCard(getDoubleInput("Enter amount to pay: "));
