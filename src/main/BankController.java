@@ -79,7 +79,14 @@ public class BankController {
             if (selectMenuOption(1) == 1) {
                 return false;
             }
+        } else{
+            System.out.println("\n[1] Continue");
+            System.out.println("[2] Back to Main Menu");
 
+            switch (selectMenuOption(2)) {
+                case 1 -> {}
+                case 2 -> {return false;}
+            }
         }
 
         for (int i = 0; i < 3; i++) {
