@@ -76,8 +76,10 @@ public class BankController {
             boolean isAccountFound = findAccount(accountNo);
 
             if (isAccountFound) {
+                System.out.println("Login successful!");
                 return true;
             }
+            System.out.println("Incorrect account number");
         }
         System.out.println("\nToo many attempts. Try again later.");
         goBack();
@@ -88,11 +90,9 @@ public class BankController {
         for (BankAccount account : bankAccounts) {
             if (account.getAccountNo() == accountNo) {
                 currentAccount = account;
-                System.out.println("Login successful!");
                 return true;
             }
         }
-        System.out.println("Incorrect account number");
         return false;
     }
 
@@ -227,16 +227,6 @@ public class BankController {
         }
     }
 
-    private boolean isDuplicateAccountNumber(int accountNo) {
-        for (BankAccount account : bankAccounts) {
-            if (account.getAccountNo() == accountNo) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     private void createAccount(String type) {
         System.out.println("\n=======================");
         System.out.println("\nCREATE ACCOUNT");
@@ -246,8 +236,9 @@ public class BankController {
 
         while (true) {
             accountNo = inputAccountNo();
+            boolean isAccountFound = findAccount(accountNo);
 
-            if (isDuplicateAccountNumber(accountNo)) {
+            if (isAccountFound) {
                 System.out.println("\n❌ Account number already exists. Try a different one.");
                 continue;
             }
