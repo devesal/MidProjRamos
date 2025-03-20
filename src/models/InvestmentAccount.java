@@ -5,6 +5,14 @@ import java.util.ArrayList;
 /**
  * Represents an Investment Account, which extends the functionality of a Bank Account.
  * It includes features such as a minimum balance requirement and an interest rate.
+ * @author AQUINO, THEO JAMES CORONEZA
+ * @author ARELLANO, CLENDRICK JOSHUA MANGONON
+ * @author MANGONON, JOHN CEDRICK GARCIA
+ * @author ONG, RON MIGUEL CAU
+ * @author RAMOS, RICKY MARC SALAZAR
+ * @author ROSANA, JEAVEN VINCENT YOJAHN OPERIA
+ * @version 1.0
+ * @date 3/20/2025
  */
 public class InvestmentAccount extends BankAccount {
 

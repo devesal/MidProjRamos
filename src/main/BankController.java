@@ -1,6 +1,14 @@
 /**
  * The BankController class manages the overall banking system operations,
  * including user authentication, account creation, transactions, and menu navigation.
+ * @author AQUINO, THEO JAMES CORONEZA
+ * @author ARELLANO, CLENDRICK JOSHUA MANGONON
+ * @author MANGONON, JOHN CEDRICK GARCIA
+ * @author ONG, RON MIGUEL CAU
+ * @author RAMOS, RICKY MARC SALAZAR
+ * @author ROSANA, JEAVEN VINCENT YOJAHN OPERIA
+ * @version 1.0
+ * @date 3/20/2025
  */
 package main;
 

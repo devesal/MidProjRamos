@@ -3,6 +3,14 @@ package models;
 /**
  * Represents a Checking Account, which extends the BankAccount class.
  * This account requires a minimum balance and allows check encashment.
+ * @author AQUINO, THEO JAMES CORONEZA
+ * @author ARELLANO, CLENDRICK JOSHUA MANGONON
+ * @author MANGONON, JOHN CEDRICK GARCIA
+ * @author ONG, RON MIGUEL CAU
+ * @author RAMOS, RICKY MARC SALAZAR
+ * @author ROSANA, JEAVEN VINCENT YOJAHN OPERIA
+ * @version 1.0
+ * @date 3/20/2025
  */
 public class CheckingAccount extends BankAccount {
 

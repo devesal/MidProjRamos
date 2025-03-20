@@ -4,6 +4,14 @@ import java.util.ArrayList;
 /**
  * Represents a credit card account, extending the BankAccount class.
  * Allows users to manage charges, payments, credit limit, and cash advances.
+ * @author AQUINO, THEO JAMES CORONEZA
+ * @author ARELLANO, CLENDRICK JOSHUA MANGONON
+ * @author MANGONON, JOHN CEDRICK GARCIA
+ * @author ONG, RON MIGUEL CAU
+ * @author RAMOS, RICKY MARC SALAZAR
+ * @author ROSANA, JEAVEN VINCENT YOJAHN OPERIA
+ * @version 1.0
+ * @date 3/20/2025
  */
 public class CreditCardAccount extends BankAccount {
 
