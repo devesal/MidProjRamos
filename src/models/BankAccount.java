@@ -60,23 +60,23 @@ public class BankAccount {
 
     public void deposit(double amount) {
         this.balance = amount + balance;
-        System.out.print("Money has been deposited to your account");
+        System.out.println("Money has been deposited to your account");
         System.out.println("Please check your account for safety measures");
     }
 
     public void withdraw(double amount) {
         if (balance >= amount) {
             this.balance = balance - amount;
-            System.out.print("Money has been withdrawn from your account");
+            System.out.println("Money has been withdrawn from your account");
             System.out.println("Please check your account for safety measures");
         }
         if (balance < amount) {
-            System.out.print("Insufficient balance. Transaction terminated");
+            System.out.println("Insufficient balance. Transaction terminated");
         }
     }
 
     public double inquireBalance() {
-        System.out.print("Your balance is: ₱"+ balance);
+        System.out.println("Your balance is: ₱"+ balance);
         return balance;
     }
 
@@ -96,12 +96,12 @@ public class BankAccount {
 
     public void closeAccount(ArrayList<BankAccount> bankAccounts) {
         if (balance > 0) {
-            System.out.print("Please withdraw your remaining balance before closing your account");
+            System.out.println("Please withdraw your remaining balance before closing your account");
         }
         else {
             bankAccounts.remove(this);
             status = "Closed";
-            System.out.print("This account has been closed");
+            System.out.println("This account has been closed");
         }
     }
 

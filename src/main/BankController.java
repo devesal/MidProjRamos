@@ -79,7 +79,8 @@ public class BankController {
                 return true;
             }
         }
-        System.out.println("Too many attempts. Try again later.");
+        System.out.println("\nToo many attempts. Try again later.");
+        goBack();
         return false;
     }
 
@@ -110,21 +111,6 @@ public class BankController {
         return selectCheckingAccOptions();
     }
 
-    private boolean selectCheckingAccOptions() {
-        switch (selectMenuOption(7)) {
-            case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
-            case 3 -> currentAccount.withdraw(getIntInput("Enter amount to withdraw: "));
-            case 4 -> currentAccount.transferMoney(getIntInput("\nTransfer Amount: "), inputAccountNo(), bankAccounts);
-            case 5 -> System.out.println(currentAccount);
-            case 6 -> currentAccount.closeAccount(bankAccounts);
-            case 7 -> {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private boolean displayCCAccMenu() {
         System.out.println("\n=======================");
         System.out.println("\n#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
@@ -141,6 +127,26 @@ public class BankController {
         return selectCCAccOptions();
     }
 
+    private boolean selectCheckingAccOptions() {
+
+        switch (selectMenuOption(7)) {
+            case 1 -> balanceInquiry();
+            case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
+            case 3 -> currentAccount.withdraw(getIntInput("Enter amount to withdraw: "));
+            case 4 -> currentAccount.transferMoney(getIntInput("\nTransfer Amount: "), inputAccountNo(), bankAccounts);
+            case 5 -> System.out.println(currentAccount);
+            case 6 -> {
+                currentAccount.closeAccount(bankAccounts);
+                return false;
+            }
+            case 7 -> {
+                return false;
+            }
+        }
+        goBack();
+        return true;
+    }
+
     private boolean selectCCAccOptions() {
         switch (selectMenuOption(8)) {
             case 1 -> balanceInquiry();
@@ -154,6 +160,23 @@ public class BankController {
                 return false;
             }
         }
+        goBack();
+        return true;
+    }
+
+    private boolean selectInvestmentAccOptions() {
+        switch (selectMenuOption(7)) {
+            case 1 -> balanceInquiry();
+            case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
+            case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getIntInput("Enter amount to invest: "));
+            case 4 -> ((InvestmentAccount) currentAccount).inquireInvestmentValue();
+            case 5 -> System.out.println(currentAccount);
+            case 6 -> currentAccount.closeAccount(bankAccounts);
+            case 7 -> {
+                return false;
+            }
+        }
+        goBack();
         return true;
     }
 
@@ -170,21 +193,6 @@ public class BankController {
         System.out.println("[7] Exit");
 
         return selectInvestmentAccOptions();
-    }
-
-    private boolean selectInvestmentAccOptions() {
-        switch (selectMenuOption(7)) {
-            case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
-            case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getIntInput("Enter amount to invest: "));
-            case 4 -> ((InvestmentAccount) currentAccount).inquireInvestmentValue();
-            case 5 -> System.out.println(currentAccount);
-            case 6 -> currentAccount.closeAccount(bankAccounts);
-            case 7 -> {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void showAccountCreationOptions() {
@@ -252,9 +260,10 @@ public class BankController {
             case "Investment" -> bankAccounts.add(new InvestmentAccount(accountNo, name, 50000, 3.5));
         }
 
+        System.out.println("\n======================");
         System.out.println("\nAccount Created!");
-        System.out.println(name);
-        System.out.println(accountNo);
+        System.out.println("\n" + name);
+        System.out.println("#" + accountNo);
 
         goBack();
     }

@@ -37,7 +37,7 @@ public class InvestmentAccount extends BankAccount {
 
     public void inquireInvestmentValue() {
         double investmentValue = super.inquireBalance() * (1 + interest);
-        System.out.println("Your investment value is: " + investmentValue);
+        System.out.println("Your investment value is: ₱" + investmentValue);
     }
 
     @Override
