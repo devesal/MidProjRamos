@@ -70,20 +70,23 @@ public class BankController {
 
         System.out.println("\n=======================");
         System.out.println("\nSIGN IN");
+        System.out.println("[1] Go Back");
 
-        for (int i = 0; i < 3; i++) {
+        while (true) {
             int accountNo = inputAccountNo();
             boolean isAccountFound = findAccount(accountNo);
+
+            if (accountNo == 1) {
+                return false;
+            }
 
             if (isAccountFound) {
                 System.out.println("Login successful!");
                 return true;
+            } else {
+                System.out.println("❌ Account not found. Try again.");
             }
-            System.out.println("❌ Incorrect account number");
         }
-        System.out.println("\nToo many attempts. Try again later.");
-        goBack();
-        return false;
     }
 
     private boolean findAccount(int accountNo) {
@@ -105,16 +108,14 @@ public class BankController {
         System.out.println("[2] Deposit Transaction");
         System.out.println("[3] Withdraw Transaction");
         System.out.println("[4] Transfer Money");
-        System.out.println("[5] Display Account Information");
-        System.out.println("[6] Close Account");
-        System.out.println("[7] Exit");
+        System.out.println("[5] Close Account");
+        System.out.println("[6] Exit");
 
         return selectCheckingAccOptions();
     }
 
     private boolean displayCCAccMenu() {
         System.out.println("\n=======================");
-
         System.out.println("\n" + currentAccount.getAccountName());
         System.out.println(currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
 
@@ -123,26 +124,24 @@ public class BankController {
         System.out.println("[3] Pay Card");
         System.out.println("[4] Inquire Available Credit");
         System.out.println("[5] Charge to Card");
-        System.out.println("[6] Display Account Information");
-        System.out.println("[7] Close Account");
-        System.out.println("[8] Exit");
+        System.out.println("[6] Close Account");
+        System.out.println("[7] Exit");
 
         return selectCCAccOptions();
     }
 
     private boolean selectCheckingAccOptions() {
 
-        switch (selectMenuOption(7)) {
+        switch (selectMenuOption(6)) {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
             case 3 -> currentAccount.withdraw(getIntInput("Enter amount to withdraw: "));
             case 4 -> currentAccount.transferMoney(getIntInput("\nTransfer Amount: "), inputAccountNo(), bankAccounts);
-            case 5 -> System.out.println(currentAccount);
-            case 6 -> {
+            case 5 -> {
                 currentAccount.closeAccount(bankAccounts);
                 return false;
             }
-            case 7 -> {
+            case 6 -> {
                 return false;
             }
         }
@@ -151,15 +150,14 @@ public class BankController {
     }
 
     private boolean selectCCAccOptions() {
-        switch (selectMenuOption(8)) {
+        switch (selectMenuOption(7)) {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
             case 3 -> ((CreditCardAccount) currentAccount).payCard(getIntInput("Enter amount to pay: "));
             case 4 -> ((CreditCardAccount) currentAccount).inquireAvailableCredit();
             case 5 -> ((CreditCardAccount) currentAccount).chargeToCard(getIntInput("Enter amount to charge: "));
-            case 6 -> System.out.println(currentAccount);
-            case 7 -> currentAccount.closeAccount(bankAccounts);
-            case 8 -> {
+            case 6 -> currentAccount.closeAccount(bankAccounts);
+            case 7 -> {
                 return false;
             }
         }
@@ -168,14 +166,13 @@ public class BankController {
     }
 
     private boolean selectInvestmentAccOptions() {
-        switch (selectMenuOption(7)) {
+        switch (selectMenuOption(6)) {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
             case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getIntInput("Enter amount to invest: "));
             case 4 -> inquireInvestmentValue();
-            case 5 -> System.out.println(currentAccount);
-            case 6 -> currentAccount.closeAccount(bankAccounts);
-            case 7 -> {
+            case 5 -> currentAccount.closeAccount(bankAccounts);
+            case 6 -> {
                 return false;
             }
         }
@@ -193,9 +190,8 @@ public class BankController {
         System.out.println("[2] Deposit Transaction");
         System.out.println("[3] Add Investment");
         System.out.println("[4] Inquire Investment Value");
-        System.out.println("[5] Display Account Information");
-        System.out.println("[6] Close Account");
-        System.out.println("[7] Exit");
+        System.out.println("[5] Close Account");
+        System.out.println("[6] Exit");
 
         return selectInvestmentAccOptions();
     }
@@ -221,7 +217,11 @@ public class BankController {
 
     private int inputAccountNo() {
         while (true) {
-            int input = getIntInput("Account Number: ");
+            int input = getIntInput("\nAccount Number: ");
+
+            if (input == 1) {
+                return input;
+            }
 
             if (String.valueOf(input).length() != 9) {
                 System.out.println("\n❌ Account number must be exactly 9 digits. Try again.");
@@ -273,14 +273,15 @@ public class BankController {
         System.out.println("\n======================");
         System.out.println("\nBALANCE INQUIRY");
 
-        System.out.println(currentAccount);
+        System.out.println("Your balance is ₱: " + currentAccount.inquireBalance());
     }
 
     private void inquireInvestmentValue() {
         System.out.println("\n======================");
         System.out.println("\nINQUIRE INVESTMENT VALUE");
 
-        System.out.println(((InvestmentAccount) currentAccount).inquireInvestmentValue());
+        double investmentValue = ((InvestmentAccount) currentAccount).inquireInvestmentValue();
+        System.out.println("Your investment value is: ₱" + investmentValue);
     }
 
     private int selectMenuOption(int max) {
@@ -303,10 +304,10 @@ public class BankController {
             try {
                 int input = Integer.parseInt(scanner.nextLine());
 
-                if (input > 0) {
+                if (input >= 0) {
                     return input;
                 } else {
-                    System.out.println("❌ Input must be a positive integer.");
+                    System.out.println("❌ Input must not have a negative number.");
                 }
 
             } catch (NumberFormatException e) {
