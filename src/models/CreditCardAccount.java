@@ -73,9 +73,10 @@ public class CreditCardAccount extends BankAccount {
 
     @Override
     public String toString() {
-        return "Account No: " + getAccountNo() + "\nAccount Name: " +
-                getAccountName() + "\nCredit Limit: " + creditLimit +
-                "\nCharges: " + charges;
+        return getAccountName() +
+                "\n#" + getAccountNo() +
+                "\nStatus: " + getStatus() +
+                "\nCredit Limit: " + creditLimit;
     }
 
     @Override
