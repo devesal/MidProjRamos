@@ -106,10 +106,9 @@ public class BankController {
 
         System.out.println("[1] Balance Inquiry");
         System.out.println("[2] Deposit Transaction");
-        System.out.println("[3] Withdraw Transaction");
-        System.out.println("[4] Transfer Money");
-        System.out.println("[5] Close Account");
-        System.out.println("[6] Exit");
+        System.out.println("[3] Transfer Money");
+        System.out.println("[4] Close Account");
+        System.out.println("[5] Exit");
 
         return selectCheckingAccOptions();
     }
@@ -131,17 +130,16 @@ public class BankController {
     }
 
     private boolean selectCheckingAccOptions() {
-        switch (selectMenuOption(6)) {
+        switch (selectMenuOption(5)) {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
-            case 3 -> currentAccount.withdraw(getDoubleInput("Enter amount to withdraw: "));
-            case 4 -> currentAccount.transferMoney(inputAccountNo(), getDoubleInput("\nTransfer Amount: "), bankAccounts);
-            case 5 -> {
+            case 3 -> currentAccount.transferMoney(inputAccountNo(), getDoubleInput("\nTransfer Amount: "), bankAccounts);
+            case 4 -> {
                 currentAccount.closeAccount(bankAccounts);
                 goBack();
                 return false;
             }
-            case 6 -> {
+            case 5 -> {
                 return false;
             }
         }
