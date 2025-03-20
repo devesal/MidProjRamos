@@ -72,7 +72,6 @@ public class BankAccount {
     }
 
     public double inquireBalance() {
-        System.out.println("Your balance is: ₱"+ balance);
         return balance;
     }
 
