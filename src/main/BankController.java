@@ -71,6 +71,17 @@ public class BankController {
         System.out.println("\n=======================");
         System.out.println("\nSIGN IN");
 
+        if (bankAccounts.isEmpty()) { // Check if there are accounts, if none, user will be prompted to go back to the menu to create an account
+            System.out.println("\nNo accounts found. Please create an account first.");
+
+            System.out.println("\n[1] Back to Main Menu");
+
+            if (selectMenuOption(1) == 1) {
+                return false;
+            }
+
+        }
+
         for (int i = 0; i < 3; i++) {
             int accountNo = inputAccountNo();
             boolean isAccountFound = findAccount(accountNo);
