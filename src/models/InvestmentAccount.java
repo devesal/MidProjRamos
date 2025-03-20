@@ -41,16 +41,6 @@ public class InvestmentAccount extends BankAccount {
     }
 
     @Override
-    public void transferMoney(int accountNo, double amount, ArrayList<BankAccount> bankAccounts) {
-        System.out.println("❌ You cannot transfer money from an investment account.");
-    }
-
-    @Override
-    public void withdraw(double amount) {
-        System.out.println("❌ Please close your account to withdraw your investment.");
-    }
-
-    @Override
     public void closeAccount(ArrayList<BankAccount> bankAccounts) {
         double finalBalance = super.inquireBalance() * (1 + interest);
 

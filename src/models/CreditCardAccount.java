@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 public class CreditCardAccount extends BankAccount {
 
     private double creditLimit;
