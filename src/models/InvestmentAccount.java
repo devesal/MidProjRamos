@@ -51,11 +51,12 @@ public class InvestmentAccount extends BankAccount {
     public void closeAccount(ArrayList<BankAccount> bankAccounts) {
         double finalBalance = inquireBalance() * (1 + interest);
 
-        if (finalBalance > minimumBalance) {
+        if (finalBalance > minimumBalance * (1 + interest)) {
             System.out.println("Investment has been withdrawn");
             System.out.println("You have deposited ₱" + String.format("%.2f", finalBalance) + " and earned ₱" + String.format("%.2f", (finalBalance - inquireBalance())));
         } else {
             System.out.println("❌ You cannot withdraw the minimum balance");
+            return;
         }
         bankAccounts.remove(this);
         super.setStatus("Closed");
