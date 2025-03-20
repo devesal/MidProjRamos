@@ -1,3 +1,15 @@
+/**
+ * The BankController class manages user authentication, account creation,
+ * and various banking operations, including deposits, withdrawals, and transfers.
+ *
+ * Features:
+ * - User Authentication (Sign-in, Account Creation)
+ * - Account Management (Checking, Credit Card, Investment)
+ * - Transaction Processing
+ *
+ * @author
+ * @date
+ */
 package main;
 
 import models.BankAccount;
@@ -13,7 +25,9 @@ public class BankController {
     private final Scanner scanner = new Scanner(System.in);
     private final ArrayList<BankAccount> bankAccounts = new ArrayList<>();
     private BankAccount currentAccount;
-
+    /**
+     * Starts the banking system and manages authentication and transactions.
+     */
     public void start() {
         boolean running = true;
         boolean isLoggedIn = false;
@@ -53,7 +67,9 @@ public class BankController {
             }
         }
     }
-
+    /**
+     * Handles user sign-in by verifying account number.
+     */
     private void signIn() {
         System.out.println("\n=======================");
         System.out.println("\nSIGN IN");
@@ -71,13 +87,17 @@ public class BankController {
         System.out.println("\nIncorrect account number");
         goBack();
     }
-
+    /**
+     * Displays authentication menu.
+     */
     private void displayAuthMenu() {
         System.out.println("\n[1] Sign in");
         System.out.println("[2] Create Account");
         System.out.println("[3] Exit");
     }
-
+    /**
+     * Displays account creation menu.
+     */
     private void displayAccCreationMenu() {
         showAccountCreationOptions();
 
@@ -88,7 +108,9 @@ public class BankController {
             case 4 -> {return;}
         }
     }
-
+    /**
+     * Displays account type options.
+     */
     private void showAccountCreationOptions() {
         System.out.println("\n=====================");
         System.out.println("\nSELECT ACCOUNT TYPE");
@@ -98,7 +120,11 @@ public class BankController {
         System.out.println("[3] Investment Account");
         System.out.println("[4] Back to Main Menu");
     }
-
+    /**
+     * Prompts user to enter their first and last name.
+     *
+     * @return Full name as a formatted string
+     */
     private String inputName() {
         System.out.print("\nFirst Name: ");
         String lastName = scanner.nextLine();
@@ -107,7 +133,11 @@ public class BankController {
 
         return String.format("%s %s", lastName, firstName);
     }
-
+    /**
+     * Ensures account number is unique and valid.
+     *
+     * @return Valid account number
+     */
     private int inputAccountNo() { // SHOULD NOT ALLOW DUPLICATE ACCOUNT NUMBERS
         int input;
         while (true) {
@@ -120,7 +150,11 @@ public class BankController {
             System.out.println("\nAccount number must be 9 digits.");
         }
     }
-
+    /**
+     * Creates an account based on user selection.
+     *
+     * @param type The type of account to create
+     */
     private void createAccount(String type) {
         System.out.println("\n=======================");
         System.out.println("\nCREATE ACCOUNT");
@@ -144,36 +178,52 @@ public class BankController {
 
         goBack();
     }
-
+    /**
+     * Prompts the user to press any key to return to the previous menu.
+     */
     private void goBack() {
         System.out.println("\nEnter any key to go back");
         scanner.nextLine();
     }
-
+    /**
+     * Displays balance inquiry information.
+     */
     private void balanceInquiry() {
         System.out.println("\n======================");
         System.out.println("\nBALANCE INQUIRY");
 
         System.out.println(currentAccount);
     }
-
+    /**
+     * Handles deposit transactions.
+     */
     private void deposit() {
     }
-
+    /**
+     * Handles withdrawal transactions.
+     */
     private void withdraw() {
     }
-
+    /**
+     * Handles money transfers between accounts.
+     */
     private void transferMoney() {
 
     }
-
+    /**
+     * Displays detailed account information.
+     */
     private void displayAccount() {
 
     }
-
+    /**
+     * Handles account closure operations.
+     */
     private void closeAccount() {
     }
-
+    /**
+     * Displays the main menu options.
+     */
     private void displayMainMenu() {
         System.out.println("\n=======================");
         System.out.println("\n#" + currentAccount.getAccountNo() + "\n");
@@ -186,7 +236,12 @@ public class BankController {
         System.out.println("[6] Close Account");
         System.out.println("[7] Exit");
     }
-
+    /**
+     * Prompts the user to select a menu option.
+     *
+     * @param max Maximum valid menu option
+     * @return The selected menu option
+     */
     private int selectMenuOption(int max) {
         int input;
         while (true) {
@@ -199,7 +254,12 @@ public class BankController {
             System.out.println("Invalid option. Please enter a number between 1 and " + max + ".");
         }
     }
-
+    /**
+     * Gets integer input from the user.
+     *
+     * @param s Prompt message
+     * @return Integer input
+     */
     private int getIntInput(String s) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(s);
