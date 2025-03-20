@@ -134,9 +134,9 @@ public class BankController {
 
         switch (selectMenuOption(6)) {
             case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
-            case 3 -> currentAccount.withdraw(getIntInput("Enter amount to withdraw: "));
-            case 4 -> currentAccount.transferMoney(getIntInput("\nTransfer Amount: "), inputAccountNo(), bankAccounts);
+            case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
+            case 3 -> currentAccount.withdraw(getDoubleInput("Enter amount to withdraw: "));
+            case 4 -> currentAccount.transferMoney(inputAccountNo(), getDoubleInput("\nTransfer Amount: "), bankAccounts);
             case 5 -> {
                 currentAccount.closeAccount(bankAccounts);
                 return false;
@@ -152,10 +152,10 @@ public class BankController {
     private boolean selectCCAccOptions() {
         switch (selectMenuOption(7)) {
             case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
-            case 3 -> ((CreditCardAccount) currentAccount).payCard(getIntInput("Enter amount to pay: "));
+            case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
+            case 3 -> ((CreditCardAccount) currentAccount).payCard(getDoubleInput("Enter amount to pay: "));
             case 4 -> ((CreditCardAccount) currentAccount).inquireAvailableCredit();
-            case 5 -> ((CreditCardAccount) currentAccount).chargeToCard(getIntInput("Enter amount to charge: "));
+            case 5 -> ((CreditCardAccount) currentAccount).chargeToCard(getDoubleInput("Enter amount to charge: "));
             case 6 -> currentAccount.closeAccount(bankAccounts);
             case 7 -> {
                 return false;
@@ -168,8 +168,8 @@ public class BankController {
     private boolean selectInvestmentAccOptions() {
         switch (selectMenuOption(6)) {
             case 1 -> balanceInquiry();
-            case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
-            case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getIntInput("Enter amount to invest: "));
+            case 2 -> currentAccount.deposit(getDoubleInput("Enter amount to deposit: "));
+            case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getDoubleInput("Enter amount to invest: "));
             case 4 -> inquireInvestmentValue();
             case 5 -> currentAccount.closeAccount(bankAccounts);
             case 6 -> {
@@ -303,6 +303,25 @@ public class BankController {
 
             try {
                 int input = Integer.parseInt(scanner.nextLine());
+
+                if (input >= 0) {
+                    return input;
+                } else {
+                    System.out.println("❌ Input must not have a negative number.");
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    private double getDoubleInput(String message) {
+        while (true) {
+            System.out.print(message);
+
+            try {
+                double input = Double.parseDouble(scanner.nextLine());
 
                 if (input >= 0) {
                     return input;
