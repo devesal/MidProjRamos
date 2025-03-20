@@ -20,8 +20,7 @@ public class CheckingAccount extends BankAccount {
 
     @Override
     public void withdraw(double amount) {
-        System.out.println("Withdrawal is not allowed with a checking account");
-        System.out.println("Please use the encash check option instead.");
+        System.out.println("❌ Withdrawal is not allowed with a checking account");
     }
 
     @Override
@@ -33,7 +32,7 @@ public class CheckingAccount extends BankAccount {
         double currentBalance = super.inquireBalance();
 
         if (amount > currentBalance) {
-            System.out.println("Error: Insufficient funds to encash ₱" + amount);
+            System.out.println("❌ Insufficient funds to encash ₱" + amount);
             return;
         }
 
@@ -42,8 +41,7 @@ public class CheckingAccount extends BankAccount {
             System.out.println("Encashing ₱" + amount + " successful");
             super.withdraw(amount);
         } else {
-            System.out.println("Encashment denied: Remaining balance would " +
-                    "fall below minimum requirement (₱" + minimumBalance + ")");
+            System.out.println("❌ Encashment denied: Balance cannot go below (₱" + minimumBalance + ")");
         }
     }
 }

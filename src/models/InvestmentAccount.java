@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class InvestmentAccount extends BankAccount {
 
-    private double minimumBalance;
+    private final double minimumBalance;
     private final double interest;
 
     public InvestmentAccount() {
@@ -35,20 +35,19 @@ public class InvestmentAccount extends BankAccount {
         super.deposit(amount);
     }
 
-    public void inquireInvestmentValue() {
+    public double inquireInvestmentValue() {
         double investmentValue = super.inquireBalance() * (1 + interest);
-        System.out.println("Your investment value is: ₱" + investmentValue);
+        return investmentValue;
     }
 
     @Override
     public void transferMoney(int accountNo, double amount, ArrayList<BankAccount> bankAccounts) {
-        System.out.println("You cannot transfer money from an investment account.");
+        System.out.println("❌ You cannot transfer money from an investment account.");
     }
 
     @Override
     public void withdraw(double amount) {
-        System.out.println("You cannot withdraw money from an investment account.");
-        System.out.println("Please close your account to withdraw your investment.");
+        System.out.println("❌ Please close your account to withdraw your investment.");
     }
 
     @Override
@@ -58,11 +57,21 @@ public class InvestmentAccount extends BankAccount {
         if (finalBalance > 0) {
             super.withdraw(finalBalance);
         } else {
-            System.out.println("There is no balance to withdraw.");
+            System.out.println("❌ There is no balance to withdraw.");
         }
 
         bankAccounts.remove(this);
         super.setStatus("Closed");
         System.out.println("Your account has been closed.");
+    }
+
+    @Override
+    public String toString() {
+        return "Account No: " + getAccountNo() + "\n" +
+                "Account Name: " + getAccountName() + "\n" +
+                "Minimum Balance: ₱" + minimumBalance + "\n" +
+                "Interest: " + interest + "\n" +
+                "Status: " + getStatus() + "\n" +
+                "Balance: ₱" + inquireInvestmentValue();
     }
 }

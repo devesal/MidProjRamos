@@ -44,7 +44,7 @@ public class CreditCardAccount extends BankAccount {
             charges += amount;
             System.out.println("Charges successful, total charges: "+ charges);
         } else {
-            System.out.println("Not enough credit");
+            System.out.println("❌ Not enough credit");
         }
     }
 
@@ -60,7 +60,14 @@ public class CreditCardAccount extends BankAccount {
             charges += amount;
             System.out.println("Cash advance approved! Your new total balance is: ₱" + charges);
         } else {
-            System.out.println("Transaction declined: Requested cash advance exceeds your available credit.");
+            System.out.println("❌ Transaction declined: Requested cash advance exceeds your available credit.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Account No: " + getAccountNo() + "\nAccount Name: " +
+                getAccountName() + "\nCredit Limit: " + creditLimit +
+                "\nCharges: " + charges;
     }
 }
