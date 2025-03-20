@@ -58,7 +58,6 @@ public class InvestmentAccount extends BankAccount {
             System.out.println("❌ You cannot withdraw the minimum balance");
             return;
         }
-
         bankAccounts.remove(this);
         super.setStatus("Closed");
         System.out.println("Your account has been closed.");
