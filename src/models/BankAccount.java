@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 public class BankAccount {
 
     private static int nextAccountNumber = 100000000;
@@ -78,24 +80,13 @@ public class BankAccount {
         return balance;
     }
 
-    public void transferMoney(int recipientAccNo, double amount, BankAccount[] bankAccounts) {
+    public void transferMoney(int accountNumber, double amount, ArrayList<BankAccount> bankAccounts) {
 
-        boolean isAccountFound = false;
-        for (BankAccount account : bankAccounts) {
-            if (account.getAccountNo() == recipientAccNo) {
-
-                // TODO: Allow array to only have active accounts
-                if (account.getStatus().equals("Closed")) {
-                    System.out.println("Account is closed");
-                }
-
-                isAccountFound = true;
-            }
-
-            if (isAccountFound) {
+        for (BankAccount recipient : bankAccounts) {
+            if (recipient.getAccountNo() == accountNumber) {
                 balance -= amount;
-                account.deposit(amount);
-                System.out.println("Transfer successful! $" + amount + " has been sent to account #" + account.getAccountNo());
+                recipient.deposit(amount);
+                System.out.println("Transfer successful! $" + amount + " has been sent to account #" + recipient.getAccountNo());
                 return;
             }
         }
@@ -103,13 +94,18 @@ public class BankAccount {
         System.out.println("Account not found");
     }
 
-    public void closeAccount() {
+    public void closeAccount(ArrayList<BankAccount> bankAccounts) {
         if (balance > 0) {
             System.out.print("Please withdraw your remaining balance before closing your account");
         }
         else {
+            bankAccounts.remove(this);
             status = "Closed";
             System.out.print("This account has been closed");
         }
+    }
+
+    public String displayAccountType() {
+        return "Bank Account";
     }
 }

@@ -48,6 +48,11 @@ public class CreditCardAccount extends BankAccount {
         }
     }
 
+    @Override
+    public String displayAccountType() {
+        return "Credit Card Account";
+    }
+
     public void getCashAdvance(double amount) {
         double availableCredit = creditLimit - charges;
         availableCredit = availableCredit * 0.5;

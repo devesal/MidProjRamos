@@ -24,6 +24,11 @@ public class CheckingAccount extends BankAccount {
         System.out.println("Please use the encash check option instead.");
     }
 
+    @Override
+    public String displayAccountType() {
+        return "Checking Account";
+    }
+
     public void encashCheck (double amount) {
         if (amount >= minimumBalance) {
             System.out.println("Encashing of ₱" + amount + " is successful");
