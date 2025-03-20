@@ -54,10 +54,6 @@ public class BankAccount {
         return accountName;
     }
 
-    public String toString() {
-        return "\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
-    }
-
     public void deposit(double amount) {
         this.balance = amount + balance;
         System.out.println("Money has been deposited to your account");
@@ -71,7 +67,7 @@ public class BankAccount {
             System.out.println("Please check your account for safety measures");
         }
         if (balance < amount) {
-            System.out.println("Insufficient balance. Transaction terminated");
+            System.out.println("❌ Insufficient balance. Transaction terminated");
         }
     }
 
@@ -81,7 +77,6 @@ public class BankAccount {
     }
 
     public void transferMoney(int accountNumber, double amount, ArrayList<BankAccount> bankAccounts) {
-
         for (BankAccount recipient : bankAccounts) {
             if (recipient.getAccountNo() == accountNumber) {
                 balance -= amount;
@@ -90,13 +85,12 @@ public class BankAccount {
                 return;
             }
         }
-
-        System.out.println("Account not found");
+        System.out.println("❌ Account not found");
     }
 
     public void closeAccount(ArrayList<BankAccount> bankAccounts) {
         if (balance > 0) {
-            System.out.println("Please withdraw your remaining balance before closing your account");
+            System.out.println("❌ Please withdraw your remaining balance before closing your account");
         }
         else {
             bankAccounts.remove(this);
@@ -107,5 +101,9 @@ public class BankAccount {
 
     public String displayAccountType() {
         return "Bank Account";
+    }
+
+    public String toString() {
+        return "\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
     }
 }

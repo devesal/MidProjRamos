@@ -79,7 +79,7 @@ public class BankController {
                 System.out.println("Login successful!");
                 return true;
             }
-            System.out.println("Incorrect account number");
+            System.out.println("❌ Incorrect account number");
         }
         System.out.println("\nToo many attempts. Try again later.");
         goBack();
@@ -98,7 +98,8 @@ public class BankController {
 
     private boolean displayCheckingAccMenu() {
         System.out.println("\n=======================");
-        System.out.println("\n#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
+        System.out.println("\n" + currentAccount.getAccountName());
+        System.out.println(currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
 
         System.out.println("[1] Balance Inquiry");
         System.out.println("[2] Deposit Transaction");
@@ -113,7 +114,9 @@ public class BankController {
 
     private boolean displayCCAccMenu() {
         System.out.println("\n=======================");
-        System.out.println("\n#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
+
+        System.out.println("\n" + currentAccount.getAccountName());
+        System.out.println(currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
 
         System.out.println("[1] Balance Inquiry");
         System.out.println("[2] Deposit Transaction");
@@ -169,7 +172,7 @@ public class BankController {
             case 1 -> balanceInquiry();
             case 2 -> currentAccount.deposit(getIntInput("Enter amount to deposit: "));
             case 3 -> ((InvestmentAccount) currentAccount).addInvestment(getIntInput("Enter amount to invest: "));
-            case 4 -> ((InvestmentAccount) currentAccount).inquireInvestmentValue();
+            case 4 -> inquireInvestmentValue();
             case 5 -> System.out.println(currentAccount);
             case 6 -> currentAccount.closeAccount(bankAccounts);
             case 7 -> {
@@ -182,7 +185,9 @@ public class BankController {
 
     private boolean displayInvestmentAccMenu() {
         System.out.println("\n=======================");
-        System.out.println("\n#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
+
+        System.out.println("\n" + currentAccount.getAccountName());
+        System.out.println("#" + currentAccount.getAccountNo() + " - " + currentAccount.displayAccountType()+ "\n");
 
         System.out.println("[1] Balance Inquiry");
         System.out.println("[2] Deposit Transaction");
@@ -271,6 +276,13 @@ public class BankController {
         System.out.println(currentAccount);
     }
 
+    private void inquireInvestmentValue() {
+        System.out.println("\n======================");
+        System.out.println("\nINQUIRE INVESTMENT VALUE");
+
+        System.out.println(((InvestmentAccount) currentAccount).inquireInvestmentValue());
+    }
+
     private int selectMenuOption(int max) {
         while (true) {
             System.out.println("\n=======================");
@@ -280,7 +292,7 @@ public class BankController {
                 return input;
             }
 
-            System.out.println("Invalid option. Please enter a number between 1 and " + max + ".");
+            System.out.println("❌ Invalid option. Please enter a number between 1 and " + max + ".");
         }
     }
 
