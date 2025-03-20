@@ -18,11 +18,11 @@ package models;
 public class CheckingAccount extends BankAccount {
 
     /** The minimum balance that must be maintained in the account */
-    public double minimumBalance;
+    public final double minimumBalance;
 
     /**
      * Default constructor that creates a new checking account with a default minimum balance.
-     * Initializes the account with a minimum balance requirement of 5000.0.
+     * Initializes the account with a minimum balance requirement of 500.0.
      */
     public CheckingAccount() {
         super();

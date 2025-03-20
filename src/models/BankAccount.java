@@ -94,6 +94,11 @@ public class BankAccount {
     }
 
     public void transferMoney(int accountNumber, double amount, ArrayList<BankAccount> bankAccounts) {
+        if (amount > balance) {
+            System.out.println("❌ Invalid amount. Transaction terminated");
+            return;
+        }
+
         for (BankAccount recipient : bankAccounts) {
             if (recipient.getAccountNo() == accountNumber) {
                 balance -= amount;
