@@ -58,7 +58,7 @@ public class CreditCardAccount extends BankAccount {
         availableCredit = availableCredit * 0.5;
         if (amount < availableCredit) {
             charges += amount;
-            System.out.println("Cash advance approved! Your new total balance is: $" + charges);
+            System.out.println("Cash advance approved! Your new total balance is: ₱" + charges);
         } else {
             System.out.println("Transaction declined: Requested cash advance exceeds your available credit.");
         }

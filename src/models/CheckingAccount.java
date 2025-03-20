@@ -30,12 +30,20 @@ public class CheckingAccount extends BankAccount {
     }
 
     public void encashCheck (double amount) {
-        if (amount >= minimumBalance) {
-            System.out.println("Encashing of ₱" + amount + " is successful");
-            super.withdraw(amount);
-        } else {
-            System.out.println("Your withdrawal exceeds the minimum balance");
+        double currentBalance = super.inquireBalance();
+
+        if (amount > currentBalance) {
+            System.out.println("Error: Insufficient funds to encash ₱" + amount);
+            return;
         }
 
+        // Check if withdrawal would violate minimum balance
+        if ((currentBalance - amount) >= minimumBalance) {
+            System.out.println("Encashing ₱" + amount + " successful");
+            super.withdraw(amount);
+        } else {
+            System.out.println("Encashment denied: Remaining balance would " +
+                    "fall below minimum requirement (₱" + minimumBalance + ")");
+        }
     }
 }
