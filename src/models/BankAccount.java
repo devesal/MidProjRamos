@@ -98,7 +98,7 @@ public class BankAccount {
     }
 
     public String displayAccountType() {
-        return "Bank Account";
+        return "Savings Account";
     }
 
     public String toString() {

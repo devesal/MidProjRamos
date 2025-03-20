@@ -65,11 +65,9 @@ public class InvestmentAccount extends BankAccount {
 
     @Override
     public String toString() {
-        return "Account No: " + getAccountNo() + "\n" +
-                "Account Name: " + getAccountName() + "\n" +
-                "Minimum Balance: ₱" + minimumBalance + "\n" +
-                "Interest: " + interest + "\n" +
-                "Status: " + getStatus() + "\n" +
-                "Balance: ₱" + inquireInvestmentValue();
+        return getAccountName() + "\n" +
+                getAccountNo() + "\n" +
+                "Interest: " + interest * 100 + "%\n" +
+                "Status: " + getStatus() + "\n";
     }
 }
