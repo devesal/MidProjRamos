@@ -102,6 +102,6 @@ public class BankAccount {
     }
 
     public String toString() {
-        return "\nAccount Name: "+accountName+"\nAccount Number: "+accountNo+"\nBalance: "+balance+"\nStatus: "+status;
+        return accountName + "\n#" + accountNo + "\nStatus: " + status;
     }
 }
