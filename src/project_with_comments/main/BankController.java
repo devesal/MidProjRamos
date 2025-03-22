@@ -1,9 +1,9 @@
-package main;
+package project_with_comments.main;
 
-import models.BankAccount;
-import models.CheckingAccount;
-import models.CreditCardAccount;
-import models.InvestmentAccount;
+import project_with_comments.models.BankAccount;
+import project_with_comments.models.CheckingAccount;
+import project_with_comments.models.CreditCardAccount;
+import project_with_comments.models.InvestmentAccount;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -40,10 +40,9 @@ public class BankController {
      */
     public void start() {
         boolean running = true;
-        boolean isSignedIn = false;
 
         while (running) {
-
+            boolean isSignedIn = false;
             do {
                 System.out.println("\n=======================");
                 System.out.println("WELCOME TO CO-PALS BANK");
