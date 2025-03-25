@@ -1,4 +1,4 @@
-package models;
+package project_with_comments.models;
 
 /**
  * Represents a checking account in the Co-Pals Bank System.
