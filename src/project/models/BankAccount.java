@@ -1,40 +1,19 @@
-package project_with_comments.models;
+package project.models;
 
 import java.util.ArrayList;
 
-/**
- * The base class for all bank accounts in the Co-Pals Bank System.
- * This class provides the fundamental functionality for account management
- * including deposits, withdrawals, transfers, and account status tracking.
- *
- * Created on: 3/21/2025
- * 
- * @author Aquino, Theo James Coroneza
- * @author Arellano, Clendrick Joshua Mangonon
- * @author Mangonon, John Cedrick Garcia
- * @author Ong, Ron Miguel Cau
- * @author Ramos, Ricky Marc Salazar
- * @author Rosana, Jeaven Vincent Yojan Operia
- * @version 1.0
- */
 public class BankAccount {
-
-    /** Counter for generating unique account numbers */
     private static int nextAccountNumber = 100000000;
-    /** Unique 9-digit account identifier */
     private int accountNo;
-    /** Name of the account holder */
     private String accountName;
-    /** Current balance in the account */
-    private double balance;
-    /** Current status of the account (Active/Closed) */
     private String status;
+    private double balance;
 
     public BankAccount() {
         this.accountNo = nextAccountNumber++;
         accountName = "";
-        balance = 0.0;
         status = "Active";
+        balance = 0.0;
     }
 
     public BankAccount(int accountNo, String accountName) {
@@ -117,7 +96,6 @@ public class BankAccount {
         else {
             System.out.println("❌ There is no balance to withdraw");
         }
-        bankAccounts.remove(this);
         status = "Closed";
         System.out.println("This account has been closed");
     }
@@ -129,4 +107,4 @@ public class BankAccount {
     public String toString() {
         return accountName + "\n#" + accountNo + "\nStatus: " + status;
     }
-}
+} 

@@ -1,14 +1,14 @@
 package project.models;
 
-public class CheckingAccount2 extends BankAccount2 {
+public class CheckingAccount extends BankAccount {
     public final double minimumBalance;
 
-    public CheckingAccount2() {
+    public CheckingAccount() {
         super();
         this.minimumBalance = 500.0;
     }
 
-    public CheckingAccount2(int accountNo, String accountName, double minimumBalance) {
+    public CheckingAccount(int accountNo, String accountName, double minimumBalance) {
         super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
     }

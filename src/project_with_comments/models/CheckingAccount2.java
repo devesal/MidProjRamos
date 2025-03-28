@@ -4,9 +4,8 @@ package project_with_comments.models;
  * Represents a checking account in the Co-Pals Bank System.
  * This account type maintains a minimum balance requirement and provides check encashment functionality.
  * Extends the base BankAccount class to provide specialized checking account operations.
- *
  * Created on: 3/21/2025
- * 
+ *
  * @author Aquino, Theo James Coroneza
  * @author Arellano, Clendrick Joshua Mangonon
  * @author Mangonon, John Cedrick Garcia
@@ -15,7 +14,7 @@ package project_with_comments.models;
  * @author Rosana, Jeaven Vincent Yojan Operia
  * @version 1.0
  */
-public class CheckingAccount extends BankAccount {
+public class CheckingAccount2 extends BankAccount2 {
 
     /** The minimum balance that must be maintained in the account */
     public final double minimumBalance;
@@ -24,7 +23,7 @@ public class CheckingAccount extends BankAccount {
      * Default constructor that creates a new checking account with a default minimum balance.
      * Initializes the account with a minimum balance requirement of 500.0.
      */
-    public CheckingAccount() {
+    public CheckingAccount2() {
         super();
         this.minimumBalance = 500.0;
     }
@@ -36,7 +35,7 @@ public class CheckingAccount extends BankAccount {
      * @param accountName The name of the account holder
      * @param minimumBalance The minimum balance requirement for this account
      */
-    public CheckingAccount(int accountNo, String accountName, double minimumBalance) {
+    public CheckingAccount2(int accountNo, String accountName, double minimumBalance) {
         super(accountNo, accountName);
         this.minimumBalance = minimumBalance;
     }
