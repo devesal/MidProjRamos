@@ -34,15 +34,14 @@ public class BankController2 {
     private BankAccount2 currentAccount;
 
     /**
-     * Starts the banking application and manages the main program flow.
+     * Starts the banking application and manages the project_with_comments.models.main program flow.
      * Handles user authentication and routes to appropriate account-specific menus.
      * Continues running until user chooses to exit.
      */
     public void start() {
-        boolean running = true;
+        boolean isSignedIn = false;
 
-        while (running) {
-            boolean isSignedIn = false;
+        while (true) {
             do {
                 System.out.println("\n=======================");
                 System.out.println("WELCOME TO CO-PALS BANK");
