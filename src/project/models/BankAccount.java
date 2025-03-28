@@ -19,8 +19,8 @@ public class BankAccount {
     public BankAccount(int accountNo, String accountName) {
         this.accountNo = accountNo;
         this.accountName = accountName;
-        balance = 0.0;
         status = "Active";
+        balance = 0.0;
     }
 
     public BankAccount(int accountNo, String accountName, String status) {

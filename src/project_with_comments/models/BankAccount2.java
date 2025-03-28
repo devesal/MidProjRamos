@@ -25,10 +25,10 @@ public class BankAccount2 {
     private int accountNo;
     /** Name of the account holder */
     private String accountName;
-    /** Current balance in the account */
-    private double balance;
     /** Current status of the account (Active/Closed) */
     private String status;
+    /** Current balance in the account */
+    private double balance;
 
     public BankAccount2() {
         this.accountNo = nextAccountNumber++;
@@ -40,8 +40,8 @@ public class BankAccount2 {
     public BankAccount2(int accountNo, String accountName) {
         this.accountNo = accountNo;
         this.accountName = accountName;
-        balance = 0.0;
         status = "Active";
+        balance = 0.0;
     }
 
     public BankAccount2(int accountNo, String accountName, String status) {
