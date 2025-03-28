@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * The base class for all bank accounts in the Co-Pals Bank System.
  * This class provides the fundamental functionality for account management
  * including deposits, withdrawals, transfers, and account status tracking.
- *
  * Created on: 3/21/2025
  * 
  * @author Aquino, Theo James Coroneza
@@ -42,12 +41,6 @@ public class BankAccount2 {
         this.accountName = accountName;
         status = "Active";
         balance = 0.0;
-    }
-
-    public BankAccount2(int accountNo, String accountName, String status) {
-        this.accountNo = accountNo;
-        this.accountName = accountName;
-        this.status = status;
     }
 
     public void setAccountNo(int accountNo) {

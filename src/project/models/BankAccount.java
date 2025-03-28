@@ -23,12 +23,6 @@ public class BankAccount {
         balance = 0.0;
     }
 
-    public BankAccount(int accountNo, String accountName, String status) {
-        this.accountNo = accountNo;
-        this.accountName = accountName;
-        this.status = status;
-    }
-
     public void setAccountNo(int accountNo) {
         this.accountNo = accountNo;
     }
