@@ -54,12 +54,14 @@ public class BankAccount {
     }
 
     public void withdraw(double amount) {
-        if (balance >= amount) {
-            this.balance = balance - amount;
-            System.out.println("Money withdrawn: ₱" + amount);
-        } else {
+        if (balance < amount) {
             System.out.println("❌ Insufficient balance. Transaction terminated");
+            return;
         }
+
+        balance -= amount;
+        System.out.println("Withdrawal successful");
+        System.out.println("₱" + amount + " has been withdrawn from #" + accountNo);
     }
 
     public double inquireBalance() {
