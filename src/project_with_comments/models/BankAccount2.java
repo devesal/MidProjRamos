@@ -68,7 +68,7 @@ public class BankAccount2 {
     }
 
     public void deposit(double amount) {
-        this.balance = amount + balance;
+        this.balance += amount;
         System.out.println("Money has been deposited to your account");
         System.out.println("Please check your account for safety measures");
     }
