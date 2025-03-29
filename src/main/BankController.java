@@ -1,9 +1,9 @@
-package project.main;
+package main;
 
-import project.models.BankAccount;
-import project.models.CheckingAccount;
-import project.models.CreditCardAccount;
-import project.models.InvestmentAccount;
+import models.BankAccount;
+import models.CheckingAccount;
+import models.CreditCardAccount;
+import models.InvestmentAccount;
 
 import java.util.ArrayList;
 import java.util.Scanner;

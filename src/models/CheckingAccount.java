@@ -1,4 +1,4 @@
-package project.models;
+package models;
 
 public class CheckingAccount extends BankAccount {
     public final double minimumBalance;
